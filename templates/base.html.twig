@@ -1,18 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<link rel="shortcut icon" href="{{ asset('/build/images/the_district_brand/favicon_round.webp')}}" type="image/x-icon">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="relative min-h-screen">
+			<nav class="h-[80px] w-full bg-primary-700 text-2xl">
+				<div class="h-full w-full grid grid-cols-12 items-center">
+					<div class="flex justify-center col-span-1">
+						<a class="text-white" href="{{ path('app_accueil') }}">
+							<img src=" {{ asset('build/images/the_district_brand/logo_transparent_cropped.webp')}} " alt="logo" class="h-[64px]">
+						</a>
+					</div>
+					<div class="flex gap-16 justify-center col-span-10">
+						<a class="text-white" href="{{ path('app_accueil') }}">
+							Accueil
+						</a>
+						<a class="text-white" href="{{ path('app_categories') }}">
+							Catégories
+						</a>
+						<a class="text-white" href="{{ path('app_plats') }}">
+							Plats
+						</a>
+					</div>
+					<div class="flex justify-center col-span-1">
+						<a class="text-white" href="{{ path('app_accueil') }}">
+							Login
+						</a>
+					</div>
+				</div>
+			</nav>
+			<div class="pb-[80px]">
+				{% block body %}
+					{}
+				{% endblock %}
+			</div>
+			<footer class="w-full h-[80px] absolute bottom-0 bg-primary-700">
+				<div class="h-full w-full grid grid-cols-12 items-center">
+					<div class="h-full w-full col-start-11 col-span-1 flex justify-center items-center">
+						<div class="w-[150px] grid grid-cols-6 gap-2 [&>div]:h-[14px] [&>div]:w-[14px] [&>div]:border-[1px] [&>div]:rounded-full">
+							<input type="radio" name="color" id="red" class="accent-red-700" checked>
+							<input type="radio" name="color" id="orange" class="accent-orange-700">
+							<input type="radio" name="color" id="amber" class="accent-amber-700">
+							<input type="radio" name="color" id="yellow" class="accent-yellow-700">
+							<input type="radio" name="color" id="lime" class="accent-lime-700">
+							<input type="radio" name="color" id="green" class="accent-green-700">
+							<input type="radio" name="color" id="emerald" class="accent-emerald-700">
+							<input type="radio" name="color" id="teal" class="accent-teal-700">
+							<input type="radio" name="color" id="cyan" class="accent-cyan-700">
+							<input type="radio" name="color" id="sky" class="accent-sky-700">
+							<input type="radio" name="color" id="blue" class="accent-blue-700">
+							<input type="radio" name="color" id="indigo" class="accent-indigo-700">
+							<input type="radio" name="color" id="violet" class="accent-violet-700">
+							<input type="radio" name="color" id="purple" class="accent-purple-700">
+							<input type="radio" name="color" id="fuchsia" class="accent-fuchsia-700">
+							<input type="radio" name="color" id="pink" class="accent-pink-700">
+							<input type="radio" name="color" id="rose" class="accent-rose-700">
+							<input type="radio" name="color" id="slate" class="accent-slate-700">
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
 </html>

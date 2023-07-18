@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	<div class="w-full text-9xl text-center">
+		Les plats
+	</div>
+	<div class="w-full flex justify-center items-center">
+		<table class="m-5 border-separate bg-teal-800">
+			<thead>
+				<tr class="text-left bg-teal-400">
+					<th class="border-separate py-2 px-6 text-2xl ">Id</th>
+					<th class="border-separate py-2 px-6 text-2xl">Libelle</th>
+					<th class="border-separate py-2 px-6 text-2xl">Catégorie</th>
+					<th class="border-separate py-2 px-6 text-2xl">Image</th>
+					<th class="border-separate py-2 px-6 text-2xl">Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for unPlat in lesPlats %}
+					<tr class="even:bg-teal-200 odd:bg-teal-300">
+						<td class="border-separate text-2xl py-2 px-6">
+							{{ unPlat.id }}
+						</td>
+						<td class="border-separate text-2xl py-2 px-6">
+							{{ unPlat.libelle }}
+						</td>
+						<td class="border-separate text-2xl py-2 px-6 cursor-pointer hover:bg-teal-500" onclick="location.href = '{{ path('app_categories.id', {id: unPlat.categorie.id}) }}'">
+							{{ unPlat.categorie.libelle }}
+						</td>
+						<td class="border-separate text-2xl">
+							<img src="{{ asset('build/images/plats/') }}{{ unPlat.image }}" alt="{{ unPlat.image }}" class="w-full h-[250px] object-cover">
+						</td>
+						<td class="border-separate text-2xl py-2 px-6 text-center">
+							{% if unPlat.active == 1 %}
+								Oui
+							{% else %}
+								Non
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

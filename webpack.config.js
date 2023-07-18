@@ -9,6 +9,12 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
   // directory where compiled assets will be stored
   .setOutputPath("public/build/")
+
+  .copyFiles({
+    from: "./assets/images/",
+    to: "images/[path][name].[ext]",
+  })
+
   // public path used by the web server to access the output path
   .setPublicPath("/build")
   // only needed for CDN's or subdirectory deploy
@@ -57,6 +63,12 @@ Encore
     options.liveReload = true;
     options.hot;
     options.watchFiles = ["./templates/**/*", "./src/**/*"];
+    options.allowedHosts = "all";
+    options.devMiddleware = {
+      publicPath: "/build",
+      serverSideRender: true,
+      writeToDisk: true,
+    };
   })
 
   // enables Sass/SCSS support
