@@ -2948,6 +2948,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3.31.1":
+  version: 3.31.1
+  resolution: "core-js@npm:3.31.1"
+  checksum: 14519213a63c55cf188bdd2f4dece54583feaf6b90e75d6c65e07f509cd487055bf64898aeda7c97c36029ac1ea2f2ed8e4b02281553f6a257e7143a32a14015
+  languageName: node
+  linkType: hard
+
 "core-util-is@npm:~1.0.0":
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
@@ -6956,6 +6963,7 @@ __metadata:
     "@babel/preset-env": ^7.22.7
     "@symfony/webpack-encore": ^4.3.0
     autoprefixer: ^10.4.14
+    core-js: ^3.31.1
     file-loader: ^6.0.0
     postcss: ^8.4.25
     postcss-loader: ^7.3.3

@@ -27,7 +27,7 @@
 							{{ uneCategorie.libelle }}
 						</td>
 						<td class="border-separate bg-inherit text-2xl">
-							<img src="{{ asset('build/images/categories/') }}{{ uneCategorie.image }}" alt="{{ uneCategorie.image }}" class="w-full h-[250px] object-cover">
+							<img src="{{ asset(uneCategorie.image, 'categories') }}" alt="{{ uneCategorie.image }}" class="w-full h-[250px] object-cover">
 						</td>
 						<td class="border-separate bg-inherit text-2xl py-2 px-6 text-center">
 							{% if uneCategorie.active == 1 %}

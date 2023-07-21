@@ -4,6 +4,16 @@ framework:
   #csrf_protection: true
   http_method_override: false
   handle_all_throwables: true
+  assets:
+      packages:
+          categories:
+              base_path: build/images/categories/
+          plats:
+              base_path: build/images/plats/
+          logos:
+              base_path: build/images/the_district_brand/
+          icones:
+              base_path: build/images/icones/
 
   # Enables session support. Note that the session will ONLY be started if you read or write from it.
   # Remove or comment this section to explicitly disable session support.

@@ -13,6 +13,7 @@ class AccueilController extends AbstractController
     {
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
+            'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }
 }

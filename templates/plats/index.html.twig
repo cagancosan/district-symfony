@@ -30,7 +30,7 @@
 							{{ unPlat.categorie.libelle }}
 						</td>
 						<td class="border-separate text-2xl">
-							<img src="{{ asset('build/images/plats/') }}{{ unPlat.image }}" alt="{{ unPlat.image }}" class="w-full h-[250px] object-cover">
+							<img src="{{ asset(unPlat.image, 'plats') }}" alt="{{ unPlat.image }}" class="w-full h-[250px] object-cover">
 						</td>
 						<td class="border-separate text-2xl py-2 px-6 text-center">
 							{% if unPlat.active == 1 %}

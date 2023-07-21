@@ -29,7 +29,7 @@
 						<td class="border-separate py-2 px-6 text-2xl">{{ unPlat.description }}</td>
 						<td class="border-separate py-2 px-6 text-2xl">{{ unPlat.prix }}€</td>
 						<td class="border-separate text-2xl">
-							<img src="{{ asset('build/images/plats/') }}{{ unPlat.image }}" alt="{{ unPlat.image }}" class="w-full h-[250px] object-cover">
+							<img src="{{ asset(unPlat.image, 'plats') }}" alt="{{ unPlat.image }}" class="w-full h-[250px] object-cover">
 						</td>
 						<td class="border-separate py-2 px-6 text-2xl text-center">
 							{% if unPlat.active == 1 %}

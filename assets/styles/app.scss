@@ -1,3 +1,98 @@
+@use "sass:math";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+$theme-svg-size: 32px;
+$theme-input-width: $theme-svg-size * 4.5;
+$theme-input-height: $theme-svg-size * 1.5;
+
+*[class*="primary"] {
+    transition:
+        background-color 1s,
+        color 1s,
+        border-color 1s
+}
+
+//////////////////////////////////////////////
+////////////////// Theme div /////////////////
+//////////////////////////////////////////////
+#darkmode-box {
+    position: relative;
+    height: $theme-input-height;
+    width: $theme-input-width;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+//////////////////////////////////////////////
+//////////////// Theme "walls" ///////////////
+///////// (SVGs are hidden behind it) ////////
+//////////////////////////////////////////////
+.darkmode-walls {
+    z-index: 10;
+    width: 33.33%;
+    height: 100%;
+}
+
+//////////////////////////////////////////////
+//////////////////// SVGs ////////////////////
+//////////////////////////////////////////////
+#darkmode-box img {
+    position: absolute;
+    z-index: 0;
+    transition: 1s;
+    user-select: none;
+}
+
+#sun-svg {
+    width: $theme-svg-size;
+    opacity: 100%;
+    left: $theme-svg-size * 1.75;
+}
+
+#moon-svg {
+    right: 0;
+    opacity: 0;
+    width: 0;
+}
+
+///////////////////////////////////////////////////////
+//////////////////// Hidden toggle ////////////////////
+///////////////////////////////////////////////////////
+#darkmode-box input {
+    display: none;
+
+    // When toggle is checked
+
+    &:checked+label {
+        box-shadow: rgba(255, 255, 255, 0.75) inset -5px -5px 10px;
+    }
+
+    &:checked+label+#sun-svg {
+        left: 0;
+        opacity: 0;
+        width: 0;
+    }
+
+    &:checked+label+#sun-svg+#moon-svg {
+        width: $theme-svg-size;
+        right: $theme-svg-size * 1.75;
+        opacity: 100%;
+    }
+}
+
+///////////////////////////////////////////////////////
+//////////////////// Shown toggle ////////////////////
+///////////////////////////////////////////////////////
+#darkmode-box label {
+    position: relative;
+    z-index: 10;
+    width: 33.33%;
+    transition: 1s;
+    border-radius: 100%;
+    background: transparent;
+    box-shadow: rgba(255, 207, 64, 0.75) inset 5px 5px 10px;
+    cursor: pointer;
+}
