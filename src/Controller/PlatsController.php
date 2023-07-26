@@ -2,21 +2,30 @@
 
 namespace App\Controller;
 
-use App\Entity\Plat;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\CategorieRepository;
+use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PlatsController extends AbstractController
 {
-    #[Route('/plats', name: 'app_plats')]
-    public function index(ManagerRegistry $mr): Response
+    private $platRepo;
+    private $categorieRepo;
+
+    public function __construct(PlatRepository $platRepo, CategorieRepository $categorieRepo)
     {
-        $repoPlat = $mr->getRepository(Plat::class);
-        $lesPlats = $repoPlat->findAll();
-        return $this->render('plats/index.html.twig', [
+        $this->platRepo = $platRepo;
+        $this->categorieRepo = $categorieRepo;
+    }
+
+    #[Route('/plats', name: 'app_plats')]
+    public function listePlats(): Response
+    {
+        $lesPlats = $this->platRepo->findBy([], ['categorie' => 'ASC']);
+        return $this->render('plats/listePlats.twig', [
             'lesPlats' => $lesPlats,
+            'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }
 }

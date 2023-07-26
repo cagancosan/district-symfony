@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+
+{% block title %}The District - Catégories
+{% endblock %}
+
+{% block body %}
+	<div class="w-full grid grid-cols-3 gap-16 py-16 px-32 place-items-center">
+		{% for uneCategorie in lesCategories %}
+			{% embed 'categories/component.cardCategorie.twig' %}{% endembed %}
+		{% endfor %}
+	</div>
+{% endblock %}

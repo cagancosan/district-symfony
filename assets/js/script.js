@@ -7,8 +7,7 @@ window.onload = (event) => {
         else {
             theme = "light";
         }
-        document.body.classList.toggle("dark");
-        console.log(theme);
-        document.cookie = "theme=" + theme;
+        document.body.classList.toggle("dark", themeSwitcher.checked);
+        document.cookie = "theme=" + theme + ";Path=/";
     })
 }

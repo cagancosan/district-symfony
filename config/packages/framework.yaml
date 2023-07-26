@@ -10,8 +10,6 @@ framework:
               base_path: build/images/categories/
           plats:
               base_path: build/images/plats/
-          logos:
-              base_path: build/images/the_district_brand/
           icones:
               base_path: build/images/icones/
 

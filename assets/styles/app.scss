@@ -2,16 +2,14 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
 
-$theme-svg-size: 32px;
+$theme-svg-size: 24px;
 $theme-input-width: $theme-svg-size * 4.5;
 $theme-input-height: $theme-svg-size * 1.5;
 
-*[class*="primary"] {
-    transition:
-        background-color 1s,
-        color 1s,
-        border-color 1s
+*:not(g) {
+    transition: all 0.3s;
 }
 
 //////////////////////////////////////////////
@@ -40,6 +38,7 @@ $theme-input-height: $theme-svg-size * 1.5;
 //////////////////// SVGs ////////////////////
 //////////////////////////////////////////////
 #darkmode-box img {
+    pointer-events: none;
     position: absolute;
     z-index: 0;
     transition: 1s;
@@ -88,11 +87,10 @@ $theme-input-height: $theme-svg-size * 1.5;
 ///////////////////////////////////////////////////////
 #darkmode-box label {
     position: relative;
-    z-index: 10;
     width: 33.33%;
     transition: 1s;
     border-radius: 100%;
-    background: transparent;
+    background: #333;
     box-shadow: rgba(255, 207, 64, 0.75) inset 5px 5px 10px;
     cursor: pointer;
 }

@@ -1,0 +1,4 @@
+<div class="min-h-[500px] w-[400px] rounded-3xl shadow-md shadow-accent/20 overflow-hidden hover:scale-105 hover:shadow-lg hover:shadow-accent/20 hover:cursor-pointer" onclick="location.href='{{ path('app_categories.id', {id: uneCategorie.id}) }}'">
+	<img src="{{ asset(uneCategorie.image, 'categories') }}" alt="{{ uneCategorie.image }}" class="min-h-[400px] w-full object-cover">
+	<div class="flex grow justify-center items-center p-5 text-accent text-5xl text-center font-thin">{{ uneCategorie.libelle }}</div>
+</div>

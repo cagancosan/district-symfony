@@ -2,31 +2,40 @@
 
 namespace App\Controller;
 
-use App\Entity\Categorie;
-use App\Entity\Plat;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\CategorieRepository;
+use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoriesController extends AbstractController
 {
-    #[Route('/categories', name: 'app_categories')]
-    public function index(ManagerRegistry $mr): Response
+    private $platRepo;
+    private $categorieRepo;
+
+    public function __construct(PlatRepository $platRepo, CategorieRepository $categorieRepo)
     {
-        $repoCat = $mr->getRepository(Categorie::class);
-        $lesCategories = $repoCat->findAll();
-        return $this->render('categories/index.html.twig', [
+        $this->platRepo = $platRepo;
+        $this->categorieRepo = $categorieRepo;
+    }
+
+    #[Route('/categories', name: 'app_categories')]
+    public function listeCategorie(): Response
+    {
+        $lesCategories = $this->categorieRepo->findBy([], ['libelle' => 'ASC']);
+        return $this->render('categories/listeCategories.twig', [
             'lesCategories' => $lesCategories,
+            'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }
-    #[Route('/categories/{id<\d+>}', name: 'app_categories.id')]
-    public function oneCategory(ManagerRegistry $mr, $id): Response
+
+    #[Route('/categories/{id}', name: 'app_categories.id')]
+    public function uneCategorie($id): Response
     {
-        $repoPlat = $mr->getRepository(Plat::class);
-        $lesPlats = $repoPlat->findBy(['categorie' => $id]);
-        return $this->render('categories/uneCategorie.html.twig', [
+        $lesPlats = $this->platRepo->findBy(['categorie' => $id], ['libelle' => 'ASC']);
+        return $this->render('categories/listePlatsParCategorie.twig', [
             'lesPlats' => $lesPlats,
+            'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }
 }

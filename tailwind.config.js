@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors");
 
-export const content = ["./assets/**/*.js", "./templates/**/*.html.twig"];
+export const content = ["./assets/**/*.js", "./templates/**/*.twig"];
 export const theme = {
     extend: {},
 };
@@ -10,8 +9,11 @@ export const plugins = [
         defaultTheme: {
             extend: {
                 colors: {
-                    primary: '#9A0746',
-                    secondary: '#FEF4E8',
+                    logo: '#E93637',
+                    body: '#EEF2E6',
+                    primary: '#D6CDA4',
+                    accent: '#000000',
+                    visible: '#FFFFFF',
                 },
             },
         },
@@ -20,8 +22,11 @@ export const plugins = [
                 name: "dark",
                 extend: {
                     colors: {
-                        primary: '#27374D',
-                        secondary: '#DDE6ED',
+                        logo: '#E93637',
+                        body: '#132B41',
+                        primary: '#0A1821',
+                        accent: '#FFFFFF',
+                        visible: '#000000',
                     },
                 },
             },
