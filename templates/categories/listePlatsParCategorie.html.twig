@@ -1,4 +1,4 @@
-{% extends 'base.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}The District - Plats
 {% endblock %}
@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="w-full grid grid-cols-3 gap-16 py-16 px-32 place-items-center">
 		{% for unPlat in lesPlats %}
-			{% embed 'plats/component.cardPlat.twig' %}{% endembed %}
+			{% embed 'plats/component.cardPlat.html.twig' %}{% endembed %}
 		{% endfor %}
 	</div>
 {% endblock %}

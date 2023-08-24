@@ -23,7 +23,7 @@ class CategoriesController extends AbstractController
     public function listeCategorie(): Response
     {
         $lesCategories = $this->categorieRepo->findBy([], ['libelle' => 'ASC']);
-        return $this->render('categories/listeCategories.twig', [
+        return $this->render('categories/listeCategories.html.twig', [
             'lesCategories' => $lesCategories,
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
@@ -33,7 +33,7 @@ class CategoriesController extends AbstractController
     public function uneCategorie($id): Response
     {
         $lesPlats = $this->platRepo->findBy(['categorie' => $id], ['libelle' => 'ASC']);
-        return $this->render('categories/listePlatsParCategorie.twig', [
+        return $this->render('categories/listePlatsParCategorie.html.twig', [
             'lesPlats' => $lesPlats,
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);

@@ -8,8 +8,27 @@ $theme-svg-size: 24px;
 $theme-input-width: $theme-svg-size * 4.5;
 $theme-input-height: $theme-svg-size * 1.5;
 
-*:not(g) {
+.bg-logo,
+.bg-body,
+.bg-primary,
+.bg-accent,
+.bg-visible,
+.text-logo,
+.text-body,
+.text-primary,
+.text-accent,
+.text-visible,
+svg,
+rect,
+path {
     transition: all 0.3s;
+}
+
+input,
+textarea,
+select,
+option {
+    color: black;
 }
 
 //////////////////////////////////////////////
@@ -83,7 +102,7 @@ $theme-input-height: $theme-svg-size * 1.5;
 }
 
 ///////////////////////////////////////////////////////
-//////////////////// Shown toggle ////////////////////
+//////////////////// Shown toggle /////////////////////
 ///////////////////////////////////////////////////////
 #darkmode-box label {
     position: relative;
@@ -93,4 +112,25 @@ $theme-input-height: $theme-svg-size * 1.5;
     background: #333;
     box-shadow: rgba(255, 207, 64, 0.75) inset 5px 5px 10px;
     cursor: pointer;
+}
+
+
+///////////////////////////////////////////////////////
+/////////////////////// Cards /////////////////////////
+///////////////////////////////////////////////////////
+
+.foodCard {
+    @apply min-h-[500px] h-full w-[400px] flex flex-col rounded-3xl bg-gray-200 shadow-md border border-gray-200 overflow-hidden transition-all;
+}
+
+.foodCard img {
+    @apply min-h-[400px] w-full object-cover;
+}
+
+.foodCard div {
+    @apply flex grow justify-center items-center text-black text-5xl text-center font-thin;
+}
+
+.foodCard:hover {
+    @apply scale-105 cursor-pointer;
 }

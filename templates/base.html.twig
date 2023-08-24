@@ -16,7 +16,7 @@
 	</head>
 	<body class="bg-body {% if cookie == 'dark' %} dark {% endif %}">
 		{{ encore_entry_script_tags('js') }}
-		<div class="relative min-h-screen">
+		<div class="min-h-screen flex flex-col">
 			<nav class="h-[100px] w-full bg-primary text-2xl">
 				<div class="h-full w-full grid grid-cols-12 items-center">
 					<div class="flex justify-center col-span-3">
@@ -67,17 +67,20 @@
 							Plats
 						</a>
 					</div>
-					<div class="flex justify-center col-span-3">
+					<div class="flex gap-16 justify-center col-span-3">
 						<a class="text-accent" href="{{ path('app_accueil') }}">
 							Login
+						</a>
+						<a class="text-accent" href="{{ path('app_contact') }}">
+							Contact
 						</a>
 					</div>
 				</div>
 			</nav>
-			<div class="pb-[100px]">
+			<div class="flex grow bg-body">
 				{% block body %}{##}{% endblock %}
 			</div>
-			<footer class="w-full h-[100px] absolute bottom-0 bg-primary">
+			<footer class="w-full h-[100px] bg-primary">
 				<div class="h-full w-full grid grid-cols-12 items-center">
 					<div class="flex justify-center col-start-12 col-span-1">
 						<div id="darkmode-box">

@@ -11,7 +11,7 @@ class AccueilController extends AbstractController
     #[Route('/accueil', name: 'app_accueil')]
     public function index(): Response
     {
-        return $this->render('accueil/accueil.twig', [
+        return $this->render('accueil/accueil.html.twig', [
             'controller_name' => 'AccueilController',
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);

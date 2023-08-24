@@ -494,36 +494,6 @@ class Jeu1 extends Fixture
         $commande5->setEtat(3);
         $commande5->setUtilisateur($utilisateur3);
 
-        $commande6 = new Commande();
-        $commande6->setDateCommande(new \DateTime());
-        $commande6->setTotal(0);
-        $commande6->setEtat(3);
-        $commande6->setUtilisateur($utilisateur3);
-
-        $commande7 = new Commande();
-        $commande7->setDateCommande(new \DateTime());
-        $commande7->setTotal(0);
-        $commande7->setEtat(3);
-        $commande7->setUtilisateur($utilisateur3);
-
-        $commande8 = new Commande();
-        $commande8->setDateCommande(new \DateTime());
-        $commande8->setTotal(0);
-        $commande8->setEtat(2);
-        $commande8->setUtilisateur($utilisateur3);
-
-        $commande9 = new Commande();
-        $commande9->setDateCommande(new \DateTime());
-        $commande9->setTotal(0);
-        $commande9->setEtat(1);
-        $commande9->setUtilisateur($utilisateur3);
-
-        $commande10 = new Commande();
-        $commande10->setDateCommande(new \DateTime());
-        $commande10->setTotal(0);
-        $commande10->setEtat(1);
-        $commande10->setUtilisateur($utilisateur3);
-
         // Détails
         $detail1 = new Detail();
         $detail1->setQuantite(2);
@@ -562,7 +532,7 @@ class Jeu1 extends Fixture
 
         $detail8 = new Detail();
         $detail8->setQuantite(1);
-        $detail8->setCommande($commande10);
+        $detail8->setCommande($commande4);
         $detail8->setPlat($plat3_2);
 
         $detail9 = new Detail();
@@ -663,11 +633,6 @@ class Jeu1 extends Fixture
         $manager->persist($commande3);
         $manager->persist($commande4);
         $manager->persist($commande5);
-        $manager->persist($commande6);
-        $manager->persist($commande7);
-        $manager->persist($commande8);
-        $manager->persist($commande9);
-        $manager->persist($commande10);
         $manager->persist($detail1);
         $manager->persist($detail2);
         $manager->persist($detail3);

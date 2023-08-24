@@ -5,6 +5,7 @@ export const theme = {
     extend: {},
 };
 export const plugins = [
+    require("@tailwindcss/forms"),
     require("tailwindcss-themer")({
         defaultTheme: {
             extend: {

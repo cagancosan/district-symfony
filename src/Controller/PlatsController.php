@@ -23,7 +23,7 @@ class PlatsController extends AbstractController
     public function listePlats(): Response
     {
         $lesPlats = $this->platRepo->findBy([], ['categorie' => 'ASC']);
-        return $this->render('plats/listePlats.twig', [
+        return $this->render('plats/listePlats.html.twig', [
             'lesPlats' => $lesPlats,
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);

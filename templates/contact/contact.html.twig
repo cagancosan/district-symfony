@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="w-full flex self-center justify-center">
+
+		{{ form_start(form, {'attr': {'class': 'w-1/3'}}) }}
+		<div class="grid gap-4 p-10 rounded-xl shadow-md bg-gray-300 text-black text-xl">
+			<div class="flex flex-col">
+				{{ form_label(form.objet) }}
+				{{ form_widget(form.objet) }}
+				{% if form.objet.vars['errors']|length > 0 %}
+					<ul class="message">
+						{% for error in form.objet.vars['errors'] %}
+							<li class="text-red-600">{{ error.message }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+			<div class="flex flex-col">
+				{{ form_label(form.email) }}
+				{{ form_widget(form.email) }}
+				{% if form.email.vars['errors']|length > 0 %}
+					<ul class="message">
+						{% for error in form.email.vars['errors'] %}
+							<li class="text-red-600">{{ error.message }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+			<div class="flex flex-col">
+				{{ form_label(form.message) }}
+				{{ form_widget(form.message, {'attr': {'rows': '6'}}) }}
+			</div>
+			<div class="flex justify-center">
+				{{ form_widget(form.save, {'attr': {'class': 'w-full p-2 mt-8 rounded-xl transition-all bg-gray-100 text-black border hover:border-black focus:shadow-[0_0_8px_0_rgba(0,0,0,0.15)_inset]'}}) }}
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
