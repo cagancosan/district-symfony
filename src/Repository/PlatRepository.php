@@ -39,6 +39,20 @@ class PlatRepository extends ServiceEntityRepository
         }
     }
 
+    public function findMostPopularPlats(): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->join('p.details', 'd')
+            ->select('p, COUNT(d.commande) AS total')
+            ->groupBy('p')
+            ->orderBy('total', 'DESC')
+            ->addOrderBy('p.libelle', 'ASC')
+            ->setMaxResults(4);
+
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
     //    /**
     //     * @return Plat[] Returns an array of Plat objects
     //     */

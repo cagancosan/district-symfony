@@ -2,7 +2,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
 
 $theme-svg-size: 24px;
 $theme-input-width: $theme-svg-size * 4.5;
@@ -21,26 +21,26 @@ $theme-input-height: $theme-svg-size * 1.5;
 svg,
 rect,
 path {
-    transition: all 0.3s;
+	transition: all 0.3s;
 }
 
 input,
 textarea,
 select,
 option {
-    color: black;
+	color: black;
 }
 
 //////////////////////////////////////////////
 ////////////////// Theme div /////////////////
 //////////////////////////////////////////////
 #darkmode-box {
-    position: relative;
-    height: $theme-input-height;
-    width: $theme-input-width;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	position: relative;
+	height: $theme-input-height;
+	width: $theme-input-width;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 //////////////////////////////////////////////
@@ -48,89 +48,141 @@ option {
 ///////// (SVGs are hidden behind it) ////////
 //////////////////////////////////////////////
 .darkmode-walls {
-    z-index: 10;
-    width: 33.33%;
-    height: 100%;
+	z-index: 10;
+	width: 33.33%;
+	height: 100%;
 }
 
 //////////////////////////////////////////////
 //////////////////// SVGs ////////////////////
 //////////////////////////////////////////////
 #darkmode-box img {
-    pointer-events: none;
-    position: absolute;
-    z-index: 0;
-    transition: 1s;
-    user-select: none;
+	pointer-events: none;
+	position: absolute;
+	z-index: 0;
+	transition: 1s;
+	user-select: none;
 }
 
 #sun-svg {
-    width: $theme-svg-size;
-    opacity: 100%;
-    left: $theme-svg-size * 1.75;
+	width: $theme-svg-size;
+	opacity: 100%;
+	left: $theme-svg-size * 1.75;
 }
 
 #moon-svg {
-    right: 0;
-    opacity: 0;
-    width: 0;
+	right: 0;
+	opacity: 0;
+	width: 0;
 }
 
 ///////////////////////////////////////////////////////
 //////////////////// Hidden toggle ////////////////////
 ///////////////////////////////////////////////////////
 #darkmode-box input {
-    display: none;
+	display: none;
 
-    // When toggle is checked
+	// When toggle is checked
 
-    &:checked+label {
-        box-shadow: rgba(255, 255, 255, 0.75) inset -5px -5px 10px;
-    }
+	&:checked + label {
+		box-shadow: rgba(255, 255, 255, 0.75) inset -5px -5px 10px;
+	}
 
-    &:checked+label+#sun-svg {
-        left: 0;
-        opacity: 0;
-        width: 0;
-    }
+	&:checked + label + #sun-svg {
+		left: 0;
+		opacity: 0;
+		width: 0;
+	}
 
-    &:checked+label+#sun-svg+#moon-svg {
-        width: $theme-svg-size;
-        right: $theme-svg-size * 1.75;
-        opacity: 100%;
-    }
+	&:checked + label + #sun-svg + #moon-svg {
+		width: $theme-svg-size;
+		right: $theme-svg-size * 1.75;
+		opacity: 100%;
+	}
 }
 
 ///////////////////////////////////////////////////////
 //////////////////// Shown toggle /////////////////////
 ///////////////////////////////////////////////////////
 #darkmode-box label {
-    position: relative;
-    width: 33.33%;
-    transition: 1s;
-    border-radius: 100%;
-    background: #333;
-    box-shadow: rgba(255, 207, 64, 0.75) inset 5px 5px 10px;
-    cursor: pointer;
+	position: relative;
+	width: 33.33%;
+	transition: 1s;
+	border-radius: 100%;
+	background: #333;
+	box-shadow: rgba(255, 207, 64, 0.75) inset 5px 5px 10px;
+	cursor: pointer;
 }
-
 
 ///////////////////////////////////////////////////////
 /////////////////////// Cards /////////////////////////
 ///////////////////////////////////////////////////////
 
-.foodCard {
-    @apply min-h-[500px] h-full w-[400px] flex flex-col rounded-3xl bg-gray-200 shadow-md border border-gray-200 overflow-hidden transition-all;
+.cardCategorie {
+	@apply relative h-full w-full rounded-3xl shadow-md border overflow-hidden transition-all;
+
+	& > img {
+		// Card image
+		@apply h-full w-full object-cover;
+	}
+
+	& > div {
+		// Card div (name)
+		@apply absolute bottom-0 w-full h-1/4 flex justify-center items-center bg-black bg-opacity-75 text-white text-4xl text-center font-light transition-all;
+	}
+
+	&:hover {
+		// On card hover
+		@apply scale-105 cursor-pointer;
+
+		& > div {
+			@apply bg-white bg-opacity-75 text-black;
+		}
+	}
 }
 
-.foodCard img {
-    @apply min-h-[400px] w-full object-cover;
-}
+.cardPlat {
+	// Card image
+	@apply h-full flex flex-col sm:flex-row rounded-3xl bg-gray-200 shadow-md border overflow-hidden transition-all;
 
-.foodCard div {
-    @apply flex grow justify-center items-center text-black text-5xl text-center font-thin;
-}
+	& > img {
+		@apply sm:w-1/3 object-cover;
+	}
 
-.foodCard:hover {
-    @apply scale-105 cursor-pointer;
+	& > div {
+		// Card info
+		@apply sm:w-2/3 flex flex-col;
+
+		& > div:first-child {
+			// Card top row
+			@apply min-h-[50px] p-4 border text-3xl text-center font-medium;
+		}
+
+		& > div:nth-child(2) {
+			// Card middle row
+			@apply hidden sm:flex flex-grow justify-center items-center p-8 text-2xl;
+		}
+
+		& > div:last-child {
+			// Card bottom row
+			@apply w-full flex flex-col sm:flex-row min-h-[150px] sm:min-h-[50px] justify-end;
+
+			& > div {
+				// Item price
+				@apply h-full w-full sm:w-1/2 flex text-2xl text-center items-center justify-center font-bold;
+			}
+
+			& > button {
+				// Order button
+				@apply h-full w-full sm:w-1/2 bg-green-400 shadow-inner sm:rounded-tl-3xl font-bold transition-all ;
+
+				&:hover {
+					@apply bg-green-500;
+				}
+                &:active {
+                    @apply shadow-[0_0_8px_0_rgba(0,0,0,0.5)_inset];
+                }
+			}
+		}
+	}
 }

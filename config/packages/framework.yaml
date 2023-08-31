@@ -7,11 +7,11 @@ framework:
   assets:
       packages:
           categories:
-              base_path: build/images/categories/
+              base_path: build/assets/images/categories/
           plats:
-              base_path: build/images/plats/
-          icones:
-              base_path: build/images/icones/
+              base_path: build/assets/images/plats/
+          icons:
+              base_path: build/assets/images/icons/
 
   # Enables session support. Note that the session will ONLY be started if you read or write from it.
   # Remove or comment this section to explicitly disable session support.

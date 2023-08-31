@@ -5,7 +5,7 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
-		<link rel="shortcut icon" href="{{ asset('favicon.svg', 'icones')}}" type="image/x-icon">
+		<link rel="shortcut icon" href="{{ asset('favicon.svg', 'icons')}}" type="image/x-icon">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -14,13 +14,13 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="bg-body {% if cookie == 'dark' %} dark {% endif %}">
+	<body class="bg-body {% if cookie == 'dark' %} dark {% endif %} ">
 		{{ encore_entry_script_tags('js') }}
 		<div class="min-h-screen flex flex-col">
 			<nav class="h-[100px] w-full bg-primary text-2xl">
 				<div class="h-full w-full grid grid-cols-12 items-center">
-					<div class="flex justify-center col-span-3">
-						<a class="text-accent" href="{{ path('app_accueil') }}">
+					<div class="flex justify-center col-span-4">
+						<a class="text-visible" href="{{ path('app_accueil') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" preserveaspectratio="xMidYMid meet" color-interpolation-filters="sRGB" style="margin: auto;" viewbox="42.64 91.14 254.71 67.73" class="h-[64px]">
 								<g transform="translate(42.64440155029297,91.13536834716797)">
 									<g transform="translate(0,0)">
@@ -37,7 +37,7 @@
 											</svg>
 										</g>
 									</g>
-									<g transform="translate(67,17.17748260498047)" class="fill-accent">
+									<g transform="translate(67,17.17748260498047)" class="fill-visible">
 										<g transform="translate(0,0)">
 											<g transform="scale(0.8699999999999999)">
 												<g>
@@ -59,40 +59,60 @@
 							</svg>
 						</a>
 					</div>
-					<div class="flex gap-16 justify-center col-span-6">
-						<a class="text-accent" href="{{ path('app_categories') }}">
+					<div class="flex gap-16 justify-center col-span-4">
+						<a class="text-visible" href="{{ path('app_accueil') }}">
+							Accueil
+						</a>
+						<a class="text-visible" href="{{ path('app_categories') }}">
 							Catégories
 						</a>
-						<a class="text-accent" href="{{ path('app_plats') }}">
+						<a class="text-visible" href="{{ path('app_plats') }}">
 							Plats
 						</a>
 					</div>
 					<div class="flex gap-16 justify-center col-span-3">
-						<a class="text-accent" href="{{ path('app_accueil') }}">
+						<a class="text-visible" href="#">
 							Login
 						</a>
-						<a class="text-accent" href="{{ path('app_contact') }}">
+						<a class="text-visible" href="{{ path('app_contact') }}">
 							Contact
 						</a>
 					</div>
-				</div>
-			</nav>
-			<div class="flex grow bg-body">
-				{% block body %}{##}{% endblock %}
-			</div>
-			<footer class="w-full h-[100px] bg-primary">
-				<div class="h-full w-full grid grid-cols-12 items-center">
-					<div class="flex justify-center col-start-12 col-span-1">
+					<div class="flex justify-center col-span-1">
 						<div id="darkmode-box">
 							<div class="darkmode-walls bg-primary"></div>
 							<input type="checkbox" name="theme" id="darkmode-toggle" {% if cookie == 'dark' %} checked {% endif %}>
 							<label class="h-full" for="darkmode-toggle"></label>
-							<img src="{{ asset('sun.svg', 'icones') }}" alt="thème clair" id="sun-svg">
-							<img src="{{ asset('moon.svg', 'icones') }}" alt="thème sombre" id="moon-svg">
+							<img src="{{ asset('sun.svg', 'icons') }}" alt="thème clair" id="sun-svg">
+							<img src="{{ asset('moon.svg', 'icons') }}" alt="thème sombre" id="moon-svg">
 							<div class="darkmode-walls bg-primary"></div>
 						</div>
 					</div>
 				</div>
+			</nav>
+			<div class="w-full text-center">
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						{% if label == 'error' %}
+							<div class="w-full py-4 bg-red-500 text-white">
+								<span class="text-3xl">{{ message }}</span>
+							</div>
+						{% endif %}
+						{% if label == 'success' %}
+							<div class="w-full py-4 bg-green-500 text-white">
+								<span class="text-3xl">{{ message }}</span>
+							</div>
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</div>
+			<div class="flex grow justify-center items-center bg-body">
+				<div class="w-3/4">
+					{% block body %}{##}{% endblock %}
+				</div>
+			</div>
+			<footer class="w-full h-[100px] bg-primary">
+				<div class="h-full w-full grid grid-cols-12 items-center"></div>
 			</footer>
 		</div>
 	</body>

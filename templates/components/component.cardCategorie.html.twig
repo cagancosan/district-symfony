@@ -1,0 +1,4 @@
+<div class="cardCategorie" onclick="location.href='{{ path('app_plats.categorie_id', { categorie_id: uneCategorie.id }) }}'">
+	<img src="{{ asset(uneCategorie.image, 'categories') }}" alt="{{ uneCategorie.image }}"/>
+	<div>{{ uneCategorie.libelle }}</div>
+</div>

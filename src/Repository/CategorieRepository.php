@@ -39,6 +39,21 @@ class CategorieRepository extends ServiceEntityRepository
         }
     }
 
+    public function findMostPopularCategories(): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c, SUM(d.quantite) as total')
+            ->join('c.plats', 'p')
+            ->join('p.details', 'd')
+            ->groupBy('c.id')
+            ->orderBy('total', 'DESC')
+            ->addOrderBy('p.libelle', 'ASC')
+            ->setMaxResults(6);
+
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
     //    /**
     //     * @return Categorie[] Returns an array of Categorie objects
     //     */
