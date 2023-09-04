@@ -19,8 +19,18 @@
 		<div class="min-h-screen flex flex-col">
 			<nav class="h-[100px] w-full bg-primary text-2xl">
 				<div class="h-full w-full grid grid-cols-12 items-center">
-					<div class="flex justify-center col-span-4">
-						<a class="text-visible" href="{{ path('app_accueil') }}">
+					<div class="flex justify-center col-span-1">
+						<div id="darkmode-box">
+							<div class="darkmode-walls bg-primary"></div>
+							<input type="checkbox" name="theme" id="darkmode-toggle" {% if cookie == 'dark' %} checked {% endif %}>
+							<label class="h-full" for="darkmode-toggle"></label>
+							<img src="{{ asset('sun.svg', 'icons') }}" alt="thème clair" id="sun-svg">
+							<img src="{{ asset('moon.svg', 'icons') }}" alt="thème sombre" id="moon-svg">
+							<div class="darkmode-walls bg-primary"></div>
+						</div>
+					</div>
+					<div class="flex justify-center col-span-2">
+						<a class="text-visible" href="{{ path('app_home') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" preserveaspectratio="xMidYMid meet" color-interpolation-filters="sRGB" style="margin: auto;" viewbox="42.64 91.14 254.71 67.73" class="h-[64px]">
 								<g transform="translate(42.64440155029297,91.13536834716797)">
 									<g transform="translate(0,0)">
@@ -59,34 +69,32 @@
 							</svg>
 						</a>
 					</div>
-					<div class="flex gap-16 justify-center col-span-4">
-						<a class="text-visible" href="{{ path('app_accueil') }}">
+					<div class="flex gap-16 justify-center col-span-6">
+						<a class="text-visible decoration-visible hover:underline" href="{{ path('app_home') }}">
 							Accueil
 						</a>
-						<a class="text-visible" href="{{ path('app_categories') }}">
+						<a class="text-visible decoration-visible hover:underline" href="{{ path('app_categories') }}">
 							Catégories
 						</a>
-						<a class="text-visible" href="{{ path('app_plats') }}">
+						<a class="text-visible decoration-visible hover:underline" href="{{ path('app_foods') }}">
 							Plats
 						</a>
-					</div>
-					<div class="flex gap-16 justify-center col-span-3">
-						<a class="text-visible" href="#">
-							Login
-						</a>
-						<a class="text-visible" href="{{ path('app_contact') }}">
+						<a class="text-visible decoration-visible hover:underline" href="{{ path('app_contact') }}">
 							Contact
 						</a>
 					</div>
-					<div class="flex justify-center col-span-1">
-						<div id="darkmode-box">
-							<div class="darkmode-walls bg-primary"></div>
-							<input type="checkbox" name="theme" id="darkmode-toggle" {% if cookie == 'dark' %} checked {% endif %}>
-							<label class="h-full" for="darkmode-toggle"></label>
-							<img src="{{ asset('sun.svg', 'icons') }}" alt="thème clair" id="sun-svg">
-							<img src="{{ asset('moon.svg', 'icons') }}" alt="thème sombre" id="moon-svg">
-							<div class="darkmode-walls bg-primary"></div>
-						</div>
+					<div class="flex gap-16 justify-center col-span-3">
+						{% if app.user %}
+							<a class="text-visible decoration-visible hover:underline" href="{{ path('app_profile') }}">Profil</a>
+							<a class="text-visible decoration-visible hover:underline" href="{{ path('app_logout') }}">Déconnexion</a>
+						{% else %}
+							<a class="text-visible decoration-visible hover:underline" href="{{ path('app_register') }}">
+								Inscription
+							</a>
+							<a class="text-visible decoration-visible hover:underline" href="{{ path('app_login') }}">
+								Connexion
+							</a>
+						{% endif %}
 					</div>
 				</div>
 			</nav>

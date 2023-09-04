@@ -10,13 +10,7 @@
 </style>
 
 <img src="{{ email.image('@icons/logo.svg') }}"/>
-<span>
-	Bonjour
-	{{ nick }}
-	votre adresse est
-	{{ to }}
-	!
-</span>
+<span>Bonjour {{ nick }} votre adresse est {{ to }} !</span>
 <h3>{{ message }}</h3>
 <img src="{{ email.image('@icons/logo.svg') }}"/>
 {% endapply %}

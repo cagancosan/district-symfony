@@ -25,6 +25,7 @@ class Jeu1 extends Fixture
         $utilisateur1->setCp('75000');
         $utilisateur1->setVille('Paris');
         $utilisateur1->setRoles(['ROLE_ADMIN']);
+        $utilisateur1->setVerified(1);
 
         $utilisateur2 = new Utilisateur();
         $utilisateur2->setEmail('sophie.m@chef.com');
@@ -36,6 +37,7 @@ class Jeu1 extends Fixture
         $utilisateur2->setCp('69000');
         $utilisateur2->setVille('Lyon');
         $utilisateur2->setRoles(['ROLE_CHEF']);
+        $utilisateur2->setVerified(1);
 
         $utilisateur3 = new Utilisateur();
         $utilisateur3->setEmail('marie.d@client.com');
@@ -47,6 +49,7 @@ class Jeu1 extends Fixture
         $utilisateur3->setCp('13000');
         $utilisateur3->setVille('Marseille');
         $utilisateur3->setRoles(['ROLE_CLIENT']);
+        $utilisateur3->setVerified(0);
 
         // Catégories 
         $categorie1 = new Categorie();

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% form_theme registrationForm 'form/theme.html.twig' %}
+
+{% block title %}
+	The District - Inscription
+{% endblock %}
+
+{% block body %}
+	<div class="flex justify-center">
+			{{ form_start(registrationForm, {'attr': {'class': 'grid grid-cols-2 gap-4 p-10 rounded-xl shadow-md bg-gray-300 text-black text-xl w-full max-w-[800px]'}}) }}
+                {{ form_row(registrationForm.email, {'row_attr' : {'class': 'flex flex-col col-span-2'}}) }}
+                {{ form_row(registrationForm.plainPassword, {'row_attr' : {'class': 'flex flex-col col-span-2'}}) }}
+                {{ form_row(registrationForm.nom, {'row_attr' : {'class': 'flex flex-col col-span-2 sm:col-span-1'}}) }}
+                {{ form_row(registrationForm.prenom, {'row_attr' : {'class': 'flex flex-col col-span-2 sm:col-span-1'}}) }}
+                {{ form_row(registrationForm.telephone, {'row_attr' : {'class': 'flex flex-col col-span-2'}}) }}
+                {{ form_row(registrationForm.adresse, {'row_attr' : {'class': 'flex flex-col col-span-2'}}) }}
+                {{ form_row(registrationForm.cp, {'row_attr' : {'class': 'flex flex-col col-span-2 sm:col-span-1'}}) }}
+                {{ form_row(registrationForm.ville, {'row_attr' : {'class': 'flex flex-col col-span-2 sm:col-span-1'}}) }}
+                {{ form_row(registrationForm.save, {'row_attr' : {'class': 'flex items-center justify-center col-span-2'}}) }}
+			{{ form_end(registrationForm) }}
+	</div>
+{% endblock %}

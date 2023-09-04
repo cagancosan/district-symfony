@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	The District - Connexion
+{% endblock %}
+
+{% block body %}
+	<div class="flex justify-center">
+		<form method="post" class="grid gap-4 p-10 rounded-xl shadow-md bg-gray-300 text-black text-xl w-full max-w-[600px]">
+			{% if error %}
+				<span class="text-red-600">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+			{% endif %}
+
+			<label for="inputEmail">Email*</label>
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus>
+
+			<label for="inputPassword">Mot de passe*</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<div class="flex justify-end">
+				<label class="flex items-center">
+					<input type="checkbox" name="_remember_me" class="mx-2">
+					<span class="select-none">Se souvenir de moi</span>
+				</label>
+			</div>
+			<input class="w-full p-2 rounded-xl bg-gray-100 text-black transition-all hover:bg-gray-200 active:shadow-[0_0_8px_0_rgba(0,0,0,0.5)_inset" type="submit" value="Connexion">
+		</form>
+	</div>
+{% endblock %}

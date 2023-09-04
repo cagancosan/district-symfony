@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Hello AccueilController!
+	The District - Accueil
 {% endblock %}
 {% block body %}
 	<div class="text-6xl py-8 text-visible">Les catégories populaires</div>
 	<div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
-		{% for uneCategorie in lesCategories %}
-			{% embed 'components/component.cardCategorie.html.twig' with { uneCategorie: uneCategorie[0] } %}{% endembed %}
+		{% for categorie in categories %}
+			{% embed 'components/component.cardCategorie.html.twig' with { categorie: categorie[0] } %}{% endembed %}
 		{% endfor %}
 	</div>
 	<div class="text-6xl py-8 text-visible">Les plats populaires</div>
 	<div class="w-full grid grid-cols-1 xl:grid-cols-2 gap-8 pb-8 place-items-center">
-		{% for unPlat in lesPlats %}
-			{% embed 'components/component.cardPlat.html.twig' with { unPlat: unPlat[0] } %}{% endembed %}
+		{% for food in foods %}
+			{% embed 'components/component.cardFood.html.twig' with { food: food[0] } %}{% endembed %}
 		{% endfor %}
 	</div>
 {% endblock %}

@@ -14,22 +14,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager, MailService $ms): Response
+    public function contact(Request $request, EntityManagerInterface $entityManager, MailService $ms): Response
     {
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $message = new Contact();
-            $data = $form->getData();
-            $to = $data->getEmail();
-            $message = $data;
-            $sent = $ms->sendEmail('the@district.com', $message->getEmail(), $message->getObjet(), $message->getMessage());
+            $contact = new Contact();
+            $contact = $form->getData();
+            $to = $contact->getEmail();
+            $subject = $contact->getObjet();
+            $message = $contact->getMessage();
+            $sent = $ms->sendEmail('the@district.com', $to, $subject, $message);
             if ($sent) {
                 $this->addFlash('success', "Nous confirmons la réception de votre message, vous recevrez une réponse sous 48H à l'adresse suivante : $to.");
             } else {
                 $this->addFlash('error', "Une erreur est survenue lors de l'envoi du mail.");
             }
-            $entityManager->persist($message);
+            $entityManager->persist($contact);
             $entityManager->flush();
             return $this->redirectToRoute('app_contact');
         }

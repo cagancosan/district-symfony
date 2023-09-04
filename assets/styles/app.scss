@@ -21,7 +21,7 @@ $theme-input-height: $theme-svg-size * 1.5;
 svg,
 rect,
 path {
-	transition: all 0.3s;
+	transition: all 0.5s;
 }
 
 input,
@@ -60,7 +60,7 @@ option {
 	pointer-events: none;
 	position: absolute;
 	z-index: 0;
-	transition: 1s;
+	transition: 0.5s;
 	user-select: none;
 }
 
@@ -107,7 +107,7 @@ option {
 #darkmode-box label {
 	position: relative;
 	width: 33.33%;
-	transition: 1s;
+	transition: 0.5s;
 	border-radius: 100%;
 	background: #333;
 	box-shadow: rgba(255, 207, 64, 0.75) inset 5px 5px 10px;
@@ -141,7 +141,7 @@ option {
 	}
 }
 
-.cardPlat {
+.cardFood {
 	// Card image
 	@apply h-full flex flex-col sm:flex-row rounded-3xl bg-gray-200 shadow-md border overflow-hidden transition-all;
 
@@ -174,14 +174,15 @@ option {
 
 			& > button {
 				// Order button
-				@apply h-full w-full sm:w-1/2 bg-green-400 shadow-inner sm:rounded-tl-3xl font-bold transition-all ;
+				@apply h-full w-full sm:w-1/2 bg-green-400 shadow-inner sm:rounded-tl-3xl font-bold transition-all;
 
 				&:hover {
 					@apply bg-green-500;
 				}
-                &:active {
-                    @apply shadow-[0_0_8px_0_rgba(0,0,0,0.5)_inset];
-                }
+
+				&:active {
+					@apply shadow-[0_0_8px_0_rgba(0,0,0,0.5)_inset];
+				}
 			}
 		}
 	}

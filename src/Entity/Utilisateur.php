@@ -6,10 +6,13 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte existant avec cette adresse e-mail.')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -17,7 +20,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Email(message: "Veuillez saisir une adresse e-mail valide.")]
+    #[Assert\NotNull(message: "Veuillez saisir une adresse e-mail.")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -30,25 +35,40 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(max: 50, maxMessage: "Le nom ne peut excéder {{ limit }} caractères.")]
+    #[Assert\NotNull(message: "Veuillez saisir un nom.")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(max: 50, maxMessage: "Le prénom ne peut excéder {{ limit }} caractères.")]
+    #[Assert\NotNull(message: "Veuillez saisir un prénom.")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Length(max: 20, maxMessage: "Le numéro de téléphone ne peut excéder {{ limit }} caractères.")]
+    #[Assert\NotNull(message: "Veuillez saisir un numéro de téléphone.")]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(max: 50, maxMessage: "L'adresse ne peut excéder {{ limit }} caractères.")]
+    #[Assert\NotNull(message: "Veuillez saisir une adresse.")]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Length(max: 20, maxMessage: "Le code postal ne peut excéder {{ limit }} caractères.")]
+    #[Assert\NotNull(message: "Veuillez saisir un code postal.")]
     private ?string $cp = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(max: 50, maxMessage: "Le ville ne peut excéder {{ limit }} caractères.")]
+    #[Assert\NotNull(message: "Veuillez saisir une ville.")]
     private ?string $ville = null;
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Commande::class)]
     private Collection $commandes;
+
+    #[ORM\Column(type: 'boolean')]
+    private $verified = false;
 
     public function __construct()
     {
@@ -89,7 +109,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -223,6 +243,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $commande->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): static
+    {
+        $this->verified = $verified;
 
         return $this;
     }

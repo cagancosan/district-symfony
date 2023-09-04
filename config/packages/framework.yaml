@@ -8,8 +8,8 @@ framework:
       packages:
           categories:
               base_path: build/assets/images/categories/
-          plats:
-              base_path: build/assets/images/plats/
+          foods:
+              base_path: build/assets/images/foods/
           icons:
               base_path: build/assets/images/icons/
 

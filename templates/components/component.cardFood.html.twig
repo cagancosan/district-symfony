@@ -1,0 +1,11 @@
+<div class="cardFood">
+	<img src="{{ asset(food.image, 'foods') }}" alt="{{ food.image }}"/>
+	<div>
+		<div>{{ food.libelle }}</div>
+		<div>{{ food.description }}</div>
+		<div>
+			<div>{{ food.prix|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr') }}</div>
+			<button>Ajouter au panier</button>
+		</div>
+	</div>
+</div>
