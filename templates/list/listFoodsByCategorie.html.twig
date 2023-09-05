@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	The District - Catégories
+	The District -
+	{{ foods.0.categorie.libelle }}
 {% endblock %}
 
 {% block body %}
-	<div class="text-6xl text-visible mb-4">Les catégories</div>
+	<div class="text-6xl text-visible mb-8">Les
+		{{ foods.0.categorie.libelle|lower }}</div>
 	<div class="flex flex-col justify-center items-center my-8">
 		<span class="text-xl text-visible">Page
 			{{ currentPage }}
@@ -14,7 +16,7 @@
 		<div class="flex justify-center bg-secondary border border-dark border-opacity-25 rounded-md shadow-lg">
 			<div class="flex divide-x divide-dark divide-opacity-25">
 				{% if currentPage != 1 %}
-					<a href="{{ path('app_categories', { page: currentPage - 1 }) }}" class="px-4 py-1 flex justify-center items-center rounded-l-md hover:bg-light hover:bg-opacity-25">
+					<a href="{{ path('app_foods.categorie_id', { categorie_id:foods.0.categorie.id , page: currentPage - 1 }) }}" class="px-4 py-1 flex justify-center items-center rounded-l-md hover:bg-light hover:bg-opacity-25">
 						<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 448 512">
 							<path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" class="fill-dark"/>
 						</svg>
@@ -26,13 +28,13 @@
 							{{ page }}
 						</span>
 					{% else %}
-						<a href="{{ path('app_categories', { page: page }) }}" class="px-4 py-1 flex justify-center items-center underline text-dark hover:bg-light hover:bg-opacity-25 }}">
+						<a href="{{ path('app_foods.categorie_id', { categorie_id:foods.0.categorie.id , page: page }) }}" class="px-4 py-1 flex justify-center items-center hover:bg-light hover:bg-opacity-25 underline text-dark }}">
 							{{ page }}
 						</a>
 					{% endif %}
 				{% endfor %}
 				{% if currentPage != totalPages %}
-					<a href="{{ path('app_categories', { page: currentPage + 1 }) }}" class="px-4 py-1 flex justify-center items-center rounded-r-md hover:bg-light hover:bg-opacity-25">
+					<a href="{{ path('app_foods.categorie_id', { categorie_id:foods.0.categorie.id , page: currentPage + 1 }) }}" class="px-4 py-1 flex justify-center items-center rounded-r-md hover:bg-light hover:bg-opacity-25">
 						<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewbox="0 0 448 512">
 							<path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" class="fill-dark"/>
 						</svg>
@@ -41,9 +43,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
-		{% for categorie in categories %}
-			{% embed 'components/component.cardCategorie.html.twig' %}{% endembed %}
+	<div class="w-full grid grid-cols-1 xl:grid-cols-2 gap-8 place-items-center">
+		{% for food in foods %}
+			{% embed 'components/component.cardFood.html.twig' %}{% endembed %}
 		{% endfor %}
 	</div>
 {% endblock %}

@@ -3,47 +3,62 @@
 	The District - Profil
 {% endblock %}
 {% block body %}
-	<div class="flex flex-col justify-center py-8 bg-primary rounded-xl">
-		<span class="text-5xl text-center text-visible pb-16">Vos informations</span>
-		<table class="table-auto text-visible">
-			<thead>
-				<tr>
-					<th>Email</th>
-					<th>Nom</th>
-					<th>Prénom</th>
-					<th>Téléphone</th>
-					<th>Adresse</th>
-					<th>Code postal</th>
-					<th>Ville</th>
-					<th class="text-center">
-						{% if infos.verified %}
-							Compte vérifié
-						{% else %}
-							<span class="text-red-500">❌ Compte non vérifié ❌</span>
-						{% endif %}
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="text-center">{{ infos.email }}</td>
-					<td class="text-center">{{ infos.nom }}</td>
-					<td class="text-center">{{ infos.prenom }}</td>
-					<td class="text-center">{{ infos.telephone }}</td>
-					<td class="text-center">{{ infos.adresse }}</td>
-					<td class="text-center">{{ infos.cp }}</td>
-					<td class="text-center">{{ infos.ville }}</td>
-					<td class="text-center">
-						{% if infos.verified %}
-							✅
-						{% else %}
-							<a class="text-visible decoration-visible hover:underline" href="{{ path('app_verify_resend') }}">
-								Renvoyer un mail
-							</a>
-						{% endif %}
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="text-6xl text-visible mb-8">Vos informations</div>
+	<div class="grid gap-4 text-visible">
+		<div class="flex flex-col">
+			<span class="font-bold">Email</span>
+			<span>
+				{{ infos.email }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Nom</span>
+			<span>
+				{{ infos.nom }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Prénom</span>
+			<span>
+				{{ infos.prenom }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Téléphone</span>
+			<span>
+				{{ infos.telephone }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Adresse</span>
+			<span>
+				{{ infos.adresse }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Code postal</span>
+			<span>
+				{{ infos.cp }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Ville</span>
+			<span>
+				{{ infos.ville }}
+			</span>
+		</div>
+		<div class="flex flex-col">
+			<span class="font-bold">Vérification du compte</span>
+			{% if infos.verified %}
+				<span>Compte vérifié ✅</span>
+			{% else %}
+				<div class="flex flex-col">
+					<span class="text-red-500">Compte non vérifié ❌</span>
+					<a class="text-visible decoration-visible underline" href="{{ path('app_verify_resend') }}">
+						Renvoyer un mail
+					</a>
+				</div>
+			{% endif %}
+		</div>
 	</div>
 {% endblock %}

@@ -53,6 +53,16 @@ class PlatRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function countPlats($categorieId): int
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.categorie = :categorieId')
+            ->setParameter('categorieId', $categorieId);
+        $query = $qb->getQuery();
+        return $query->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Plat[] Returns an array of Plat objects
     //     */

@@ -5,7 +5,7 @@
 		{{ form_widget(form, {'attr': {'class': 'w-full'}}) }}
 		{% if form.vars['errors']|length > 0 %}
 			{% for error in form.vars['errors'] %}
-				<span class="text-red-600">{{ error.message }}</span>
+				<span class="bg-red-500 text-dark">{{ error.message }}</span>
 			{% endfor %}
 		{% endif %}
 	</div>
@@ -14,6 +14,6 @@
 {% block submit_row %}
 	{%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('flex items-center justify-center')) }) -%}
 	<div {% with {attr: row_attr} %} {{ block('attributes') }} {% endwith %}>
-		{{ form_widget(form, {'attr': {'class': 'w-full p-2 rounded-xl bg-gray-100 text-black transition-all hover:bg-gray-200 active:shadow-[0_0_8px_0_rgba(0,0,0,0.5)_inset]'}}) }}
+		{{ form_widget(form, {'attr': {'class': 'w-full themedButton'}}) }}
 	</div>
 {% endblock %}

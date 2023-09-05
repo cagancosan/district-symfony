@@ -1,5 +1,5 @@
 window.onload = (event) => {
-    let themeSwitcher = document.querySelector("#darkmode-toggle");
+    let themeSwitcher = document.querySelector("#darkmodeToggle");
     themeSwitcher.addEventListener('click', function () {
         if (themeSwitcher.checked) {
             theme = "dark";

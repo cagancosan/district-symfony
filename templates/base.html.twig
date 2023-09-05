@@ -17,28 +17,28 @@
 	<body class="bg-body {% if cookie == 'dark' %} dark {% endif %} ">
 		{{ encore_entry_script_tags('js') }}
 		<div class="min-h-screen flex flex-col">
-			<nav class="h-[100px] w-full bg-primary text-2xl">
+			<nav class="h-[100px] w-full bg-primary text-2xl mb-8">
 				<div class="h-full w-full grid grid-cols-12 items-center">
 					<div class="flex justify-center col-span-1">
-						<div id="darkmode-box">
-							<div class="darkmode-walls bg-primary"></div>
-							<input type="checkbox" name="theme" id="darkmode-toggle" {% if cookie == 'dark' %} checked {% endif %}>
-							<label class="h-full" for="darkmode-toggle"></label>
-							<img src="{{ asset('sun.svg', 'icons') }}" alt="thème clair" id="sun-svg">
-							<img src="{{ asset('moon.svg', 'icons') }}" alt="thème sombre" id="moon-svg">
-							<div class="darkmode-walls bg-primary"></div>
+						<div id="darkmodeBox">
+							<div class="darkmodeWalls bg-primary"></div>
+							<input type="checkbox" name="theme" id="darkmodeToggle" {% if cookie == 'dark' %} checked {% endif %}>
+							<label class="h-full" for="darkmodeToggle"></label>
+							<img src="{{ asset('sun.svg', 'icons') }}" alt="thème clair" id="sunSvg">
+							<img src="{{ asset('moon.svg', 'icons') }}" alt="thème sombre" id="moonSvg">
+							<div class="darkmodeWalls bg-primary"></div>
 						</div>
 					</div>
 					<div class="flex justify-center col-span-2">
-						<a class="text-visible" href="{{ path('app_home') }}">
+						<a class="text-tertiary" href="{{ path('app_home') }}">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" preserveaspectratio="xMidYMid meet" color-interpolation-filters="sRGB" style="margin: auto;" viewbox="42.64 91.14 254.71 67.73" class="h-[64px]">
 								<g transform="translate(42.64440155029297,91.13536834716797)">
 									<g transform="translate(0,0)">
 										<g>
 											<rect fill-opacity="0" stroke-width="2" x="0" y="0" width="59.99999999999999" height="67.72926355714091"/>
 											<svg x="0" y="0" width="59.99999999999999" height="67.72926355714091" style="overflow: visible;">
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewbox="7.9999847412109375 2.924999713897705 83.60501861572266 94.37499237060547" xml:space="preserve" class="fill-logo">
-													<g>
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewbox="7.9999847412109375 2.924999713897705 83.60501861572266 94.37499237060547" xml:space="preserve">
+													<g class="fill-tertiary">
 														<path d="M49.9,30l-1.1,0c-7.7,0.2-13.5,2.2-17.4,6.1c-4.7,4.8-4.7,10.5-4.7,10.8c0,0.1,0.1,0.3,0.3,0.3h44.8c0.1,0,0.3-0.1,0.3-0.3  c0-0.2,0-6-4.7-10.8C63.4,32.2,57.6,30.1,49.9,30z M32.7,44.6c-0.8,0-1.4-0.6-1.4-1.4c0-0.8,0.6-1.4,1.4-1.4c0.8,0,1.4,0.6,1.4,1.4  C34.1,44,33.5,44.6,32.7,44.6z M41.4,36.3c-0.8,0-1.4-0.6-1.4-1.4c0-0.8,0.6-1.4,1.4-1.4s1.4,0.6,1.4,1.4  C42.7,35.7,42.1,36.3,41.4,36.3z M65.5,41.6c-0.8,0-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4s1.4,0.6,1.4,1.4S66.2,41.6,65.5,41.6z"/>
 														<path d="M30.6,65.8h37.4c1.9,0,3.5-1.2,3.5-2.7v-2.5H59.8l-21.1,3.2l-8.1-3.2h-3.5V63C27.2,64.5,28.7,65.8,30.6,65.8z"/>
 														<path d="M88.1,23.9l-34.6-20c-2.2-1.3-5-1.3-7.2,0l-34.6,20C9.4,25.2,8,27.6,8,30.1v40c0,2.6,1.4,5,3.6,6.2l34.6,20  c1.1,0.6,2.3,1,3.6,1s2.5-0.3,3.6-1l34.6-20c2.2-1.3,3.6-3.7,3.6-6.2v-40C91.7,27.6,90.3,25.2,88.1,23.9z M73.8,63  c0,2.8-2.6,5-5.8,5H30.6c-3.2,0-5.8-2.3-5.8-5v-4.9h49V63z M25.2,53.8c0-1.1,0.9-1.9,1.9-1.9h44.4c1.1,0,1.9,0.9,1.9,1.9  c0,1.1-0.9,1.9-1.9,1.9H27.1C26,55.8,25.2,54.9,25.2,53.8z M71.7,49.5H27c-1.4,0-2.6-1.2-2.6-2.6c0-0.3,0-7,5.4-12.4  c4.3-4.3,10.7-6.6,18.9-6.8c0.1,0,1.1,0,1.3,0c8.3,0.2,14.6,2.5,18.9,6.8c5.4,5.5,5.4,12.2,5.4,12.4C74.3,48.3,73.1,49.5,71.7,49.5z  "/>
@@ -47,7 +47,7 @@
 											</svg>
 										</g>
 									</g>
-									<g transform="translate(67,17.17748260498047)" class="fill-visible">
+									<g transform="translate(67,17.17748260498047)" class="fill-tertiary">
 										<g transform="translate(0,0)">
 											<g transform="scale(0.8699999999999999)">
 												<g>
@@ -102,25 +102,30 @@
 				{% for label, messages in app.flashes %}
 					{% for message in messages %}
 						{% if label == 'error' %}
-							<div class="w-full py-4 bg-red-500 text-white">
+							<div class="w-full py-4 bg-red-500 text-light">
 								<span class="text-3xl">{{ message }}</span>
 							</div>
 						{% endif %}
 						{% if label == 'success' %}
-							<div class="w-full py-4 bg-green-500 text-white">
+							<div class="w-full py-4 bg-green-500 text-light">
 								<span class="text-3xl">{{ message }}</span>
 							</div>
 						{% endif %}
 					{% endfor %}
 				{% endfor %}
 			</div>
-			<div class="flex grow justify-center items-center bg-body">
+			<div class="flex grow justify-center bg-body">
 				<div class="w-3/4">
 					{% block body %}{##}{% endblock %}
 				</div>
 			</div>
-			<footer class="w-full h-[100px] bg-primary">
-				<div class="h-full w-full grid grid-cols-12 items-center"></div>
+			<footer class="w-full h-[100px] bg-primary mt-8">
+				<div class="h-full w-full flex justify-center items-center">
+					<div class="flex gap-16">
+						<a href="{{ path('app_notices') }}" class="text-visible decoration-visible hover:underline">Mentions légales</a>
+						<a href="{{ path('app_policy') }}" class="text-visible decoration-visible hover:underline">Politique de confidentialité</a>
+					</div>
+				</div>
 			</footer>
 		</div>
 	</body>
