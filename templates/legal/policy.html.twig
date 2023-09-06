@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The District - Politique de confidentialité
+{% endblock %}
+
+{% block body %}
+	<div class="flex flex-col gap-y-4 text-visible">
+		<ul>
+			<span class="text-4xl underline">Politique de confidentialité</span>
+			<li class="text-justify">Cette politique de confidentialité régit la manière dont The District collecte, utilise, conserve et divulgue les informations collectées auprès des utilisateurs (ci-après "Vous") du site Web
+				<a href="{{ path('app_home') }}" class="text-blue-500 underline">www.thedistrict.com</a>
+				(ci-après le "Site").</li>
+			<li class="text-justify">Date de dernière mise à jour de la politique de confidentialité : 06 Septembre 2023.</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">I. Collecte des informations personnelles</span>
+			<li class="text-justify">Nous pouvons collecter des informations personnelles vous concernant lorsque vous visitez notre site, vous inscrivez à notre newsletter, remplissez un formulaire ou effectuez une réservation. Les informations personnelles que nous pouvons collecter peuvent inclure votre nom, votre adresse e-mail, votre numéro de téléphone et votre adresse IP.</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">II. Utilisation des informations collectées</span>
+			<li class="text-justify">Nous pouvons utiliser les informations personnelles que nous collectons auprès de vous pour les finalités suivantes :</li>
+			<li class="text-justify">
+				- Personnaliser votre expérience sur notre site</li>
+			<li class="text-justify">
+				- Améliorer notre site</li>
+			<li class="text-justify">
+				- Vous envoyer des informations et des promotions par e-mail</li>
+			<li class="text-justify">
+				- Répondre à vos demandes, questions ou préoccupations</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">III. Protection des informations</span>
+			<li class="text-justify">Nous mettons en place des mesures de sécurité appropriées pour protéger vos informations personnelles contre tout accès non autorisé, toute altération, toute divulgation ou toute destruction.</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">IV. Divulgation à des tiers</span>
+			<li class="text-justify">Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers. Nous pouvons toutefois partager des informations démographiques agrégées et non personnelles avec des tiers à des fins de marketing, de publicité, etc.</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">V. Cookies</span>
+			<li class="text-justify">Notre site utilise des cookies pour améliorer votre expérience de navigation. Les cookies sont de petits fichiers texte stockés sur votre ordinateur qui nous permettent de vous reconnaître lors de vos visites ultérieures, de mémoriser vos préférences, etc.</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">VI. Modification de cette politique de confidentialité</span>
+			<li class="text-justify">The District se réserve le droit de mettre à jour cette politique de confidentialité à tout moment. Nous vous encourageons à consulter régulièrement cette page pour prendre connaissance des éventuelles modifications.</li>
+		</ul>
+		<ul>
+			<span class="text-3xl underline">VII. Contactez-nous</span>
+			<li class="text-justify">Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité, veuillez nous contacter sur la page
+				<a href="{{ path('app_contact') }}" class="text-blue-500 underline">contact</a>.
+			</li>
+		</ul>
+	</div>
+{% endblock %}

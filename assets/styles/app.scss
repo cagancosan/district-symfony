@@ -146,7 +146,7 @@ option {
 ///////////////////////////////////////////////////////
 
 .cardCategorie {
-	@apply relative h-full w-full rounded-3xl shadow-md border border-secondary border-opacity-25 overflow-hidden transition-all;
+	@apply relative h-full w-full rounded-3xl shadow-md overflow-hidden transition-all;
 
 	& > img {
 		// Card image
@@ -170,7 +170,7 @@ option {
 
 .cardFood {
 	// Card image
-	@apply h-full flex flex-col sm:flex-row rounded-3xl bg-secondary shadow-md border border-secondary border-opacity-25 overflow-hidden transition-all;
+	@apply h-full flex flex-col sm:flex-row rounded-3xl bg-secondary shadow-md overflow-hidden transition-all;
 
 	& > img {
 		@apply sm:w-1/3 object-cover;

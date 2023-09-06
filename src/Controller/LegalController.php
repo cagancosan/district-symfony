@@ -11,14 +11,14 @@ class LegalController extends AbstractController
     #[Route('/mentions', name: 'app_notices')]
     public function mentions(): Response
     {
-        return $this->render('legal/index.html.twig', [
+        return $this->render('legal/notices.html.twig', [
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }
     #[Route('/politique', name: 'app_policy')]
     public function policy(): Response
     {
-        return $this->render('legal/index.html.twig', [
+        return $this->render('legal/policy.html.twig', [
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }
