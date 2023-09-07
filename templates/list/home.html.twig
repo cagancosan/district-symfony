@@ -3,8 +3,8 @@
 	The District - Accueil
 {% endblock %}
 {% block body %}
-	<div class="text-6xl text-visible mb-8">Les catégories populaires</div>
-	<div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+	<div class="text-6xl text-visible mb-8 hidden lg:block">Les catégories populaires</div>
+	<div class="w-full hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
 		{% for categorie in categories %}
 			{% embed 'components/component.cardCategorie.html.twig' with { categorie: categorie[0] } %}{% endembed %}
 		{% endfor %}
@@ -12,7 +12,7 @@
 	<div class="text-6xl my-8 text-visible">Les plats populaires</div>
 	<div class="w-full grid grid-cols-1 xl:grid-cols-2 gap-8 place-items-center">
 		{% for food in foods %}
-			{% embed 'components/component.cardFood.html.twig' with { food: food[0] } %}{% endembed %}
+				{% embed 'components/component.cardFood.html.twig' with { food: food[0] } %}{% endembed %}
 		{% endfor %}
 	</div>
 {% endblock %}

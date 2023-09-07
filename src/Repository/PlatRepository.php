@@ -47,7 +47,7 @@ class PlatRepository extends ServiceEntityRepository
             ->groupBy('p')
             ->orderBy('total', 'DESC')
             ->addOrderBy('p.libelle', 'ASC')
-            ->setMaxResults(4);
+            ->setMaxResults(5);
 
         $query = $qb->getQuery();
         return $query->execute();

@@ -201,14 +201,14 @@ option {
 
 			& > button {
 				// Order button
-				@apply h-full w-full sm:w-1/2 bg-tertiary shadow-inner sm:rounded-tl-3xl font-bold transition-all;
+				@apply h-full w-full sm:w-1/2 bg-tertiary shadow-inner sm:rounded-tl-3xl font-bold;
 
 				&:hover {
 					@apply bg-tertiary bg-opacity-80;
 				}
 
 				&:active {
-					@apply shadow-[0_0_8px_0_rgba(0,0,0,0.5)_inset] bg-opacity-80;
+					@apply bg-opacity-50;
 				}
 			}
 		}

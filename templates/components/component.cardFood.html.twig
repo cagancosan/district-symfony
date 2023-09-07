@@ -1,4 +1,4 @@
-<div class="cardFood">
+<div class="cardFood {{ ((app.request.get('_route') == 'app_home') and loop.last) ? 'lg:hidden' : '' }}">
 	<img src="{{ asset(food.image, 'foods') }}" alt="{{ food.image }}"/>
 	<div>
 		<div>{{ food.libelle }}</div>

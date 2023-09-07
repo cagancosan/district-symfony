@@ -1,10 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 
-export const content = ["./assets/**/*.js", "./templates/**/*.twig"];
+export const content = [
+    "./node_modules/flowbite/**/*.js",
+    "./assets/**/*.js", "./templates/**/*.twig"
+];
 export const theme = {
     extend: {},
 };
 export const plugins = [
+    require('flowbite/plugin'),
     require("@tailwindcss/forms"),
     require("tailwindcss-themer")({
         defaultTheme: {
