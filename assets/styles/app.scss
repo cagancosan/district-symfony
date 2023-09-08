@@ -199,9 +199,9 @@ option {
 				@apply h-full w-full sm:w-1/2 flex text-2xl text-center items-center justify-center font-bold;
 			}
 
-			& > button {
+			& > a {
 				// Order button
-				@apply h-full w-full sm:w-1/2 bg-tertiary shadow-inner sm:rounded-tl-3xl font-bold;
+				@apply h-full w-full flex justify-center items-center sm:w-1/2 bg-tertiary shadow-inner sm:rounded-tl-3xl font-bold select-none;
 
 				&:hover {
 					@apply bg-tertiary bg-opacity-80;

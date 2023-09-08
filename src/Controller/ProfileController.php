@@ -9,18 +9,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {
-    private $userRepo;
+    private $utilisateurRepository;
 
-    public function __construct(UtilisateurRepository $userRepo)
+    public function __construct(UtilisateurRepository $utilisateurRepository)
     {
-        $this->userRepo = $userRepo;
+        $this->utilisateurRepository = $utilisateurRepository;
     }
     #[Route('/profil', name: 'app_profile')]
     public function index(): Response
     {
         $useremail = $this->getUser()->getUserIdentifier();
         if ($useremail) {
-            $infos = $this->userRepo->findOneBy(["email" => $useremail]);
+            $infos = $this->utilisateurRepository->findOneBy(["email" => $useremail]);
         }
 
         return $this->render('profile/index.html.twig', [

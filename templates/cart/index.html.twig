@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	The District - Panier
+{% endblock %}
+
+{% block body %}
+
+
+	<h1>panier</h1>
+	{% for i, food in cartList %}
+        {% set quantite = cart[food.id] %}
+		{{ food.libelle }}
+        {{ food.prix }}
+		{{ quantite }}
+		<br>
+
+	{% endfor %}
+
+{% endblock %}

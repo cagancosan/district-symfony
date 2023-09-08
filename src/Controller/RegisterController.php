@@ -64,12 +64,12 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/verify/resend', name: 'app_verify_resend')]
-    public function verifyResendEmail(UtilisateurRepository $userRepo)
+    public function verifyResendEmail(UtilisateurRepository $utilisateurRepository)
     {
         $user = new Utilisateur();
         $useremail = $this->getUser()->getUserIdentifier();
         if ($useremail) {
-            $user = $userRepo->findOneBy(["email" => $useremail]);
+            $user = $utilisateurRepository->findOneBy(["email" => $useremail]);
         }
         $this->emailVerifier->sendEmailConfirmation(
             'app_verify_email',

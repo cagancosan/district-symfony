@@ -1,4 +1,4 @@
-<div class="cardCategorie" onclick="location.href='{{ path('app_foods.categorie_id', { categorie_id: categorie.id }) }}'">
+<div class="cardCategorie" onclick="location.href='{{ path('app_foods.categorie', { categorie: categorie.id }) }}'">
 	<img src="{{ asset(categorie.image, 'categories') }}" alt="{{ categorie.image }}"/>
 	<div>{{ categorie.libelle }}</div>
 </div>

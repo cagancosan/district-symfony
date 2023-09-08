@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Repository\CategorieRepository;
 use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,11 +38,11 @@ class ListController extends AbstractController
         $numberToShow = 6;
         $categories = $this->categorieRepo->findBy([], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
         if ($categories) {
-            $categorieCount = $this->categorieRepo->countCategories();
+            $categoriesCount = $this->categorieRepo->countCategories();
             return $this->render('list/listCategories.html.twig', [
                 'categories' => $categories,
                 'currentPage' => $page,
-                'totalPages' => ceil($categorieCount / $numberToShow),
+                'totalPages' => ceil($categoriesCount / $numberToShow),
                 'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
             ]);
         } else {
@@ -59,13 +60,13 @@ class ListController extends AbstractController
         ]);
     }
 
-    #[Route('/plats/{categorie_id}/{page}', name: 'app_foods.categorie_id', condition: "params['page'] > 0")]
-    public function listPlatsByCategorie($categorie_id, $page = 1): Response
+    #[Route('/plats/{categorie}/{page}', name: 'app_foods.categorie', condition: "params['page'] > 0")]
+    public function listPlatsByCategorie(Categorie $categorie, $page = 1): Response
     {
         $numberToShow = 4;
-        $foods = $this->platRepo->findBy(['categorie' => $categorie_id], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
+        $foods = $this->platRepo->findBy(['categorie' => $categorie->getId()], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
         if ($foods) {
-            $foodsCount = $this->platRepo->countPlats($categorie_id);
+            $foodsCount = $this->platRepo->countPlats($categorie->getId());
             return $this->render('list/listFoodsByCategorie.html.twig', [
                 'foods' => $foods,
                 'currentPage' => $page,

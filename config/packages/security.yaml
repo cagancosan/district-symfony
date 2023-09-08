@@ -24,7 +24,6 @@ security:
         secret: "%kernel.secret%"
         lifetime: 604800
         path: /
-        always_remember_me: true
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -41,7 +40,6 @@ security:
   access_control:
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
-    - { path: ^/panier, roles: ROLE_CLIENT}
     - { path: ^/commande, roles: ROLE_CLIENT}
     - { path: ^/profil, roles: ROLE_CLIENT}
     - { path: ^/verify/resend, roles: ROLE_CLIENT}
