@@ -23,7 +23,7 @@ class ProfileController extends AbstractController
             $infos = $this->utilisateurRepository->findOneBy(["email" => $useremail]);
         }
 
-        return $this->render('profile/index.html.twig', [
+        return $this->render('profile/profile.html.twig', [
             'infos' => $infos,
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);

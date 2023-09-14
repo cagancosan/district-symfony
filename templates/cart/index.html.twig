@@ -5,16 +5,44 @@
 {% endblock %}
 
 {% block body %}
-
-
-	<h1>panier</h1>
-	{% for i, food in cartList %}
-        {% set quantite = cart[food.id] %}
-		{{ food.libelle }}
-        {{ food.prix }}
-		{{ quantite }}
-		<br>
-
-	{% endfor %}
-
+	<div class="flex flex-col">
+		<div class="text-6xl text-visible mb-8">Panier</div>
+		{% set total = 0 %}
+		<div class="w-full grid grid-rows-1 divide-y divide-primary bg-secondary rounded-xl">
+			{% for i, food in cartList %}
+				{% set quantite = cart[food.id] %}
+				{% set total = total + (food.prix * quantite) %}
+				<div class="flex flex-col sm:flex-row gap-x-4 p-4">
+					<div class="w-full sm:w-1/3 lg:w-1/4 flex">
+						<img class="object-cover rounded-xl" src="{{ asset(food.image, 'foods') }}" alt="{{ food.libelle }}"/>
+					</div>
+					<div class="w-full sm:w-2/3 lg:w-3/4 flex flex-col col-span-3 justify-between gap-y-8">
+						<div class="flex flex-col gap-y-1">
+							<span class="text-2xl underline font-medium">{{ food.libelle }}</span>
+							<span class="text-2xl italic">{{ food.description }}</span>
+						</div>
+						<div class="flex flex-col gap-y-1">
+							<span class="text-2xl inline-block font-bold">
+								{{ food.prix|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr')  }}
+							</span>
+							<span class="text-2xl">
+								<span class="inline-block">Quantité:
+									{{ quantite }}
+								</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="flex gap-x-4 p-4">
+				<div class="w-full flex flex-col gap-y-4 place-items-end">
+					<span class="text-4xl font-bold">
+						Sous-total:
+						{{ total|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr') }}
+					</span>
+					<a class="themedButton" href="{{path('app_order')}}">Commander</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

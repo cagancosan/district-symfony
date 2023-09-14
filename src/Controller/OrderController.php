@@ -11,8 +11,7 @@ class OrderController extends AbstractController
     #[Route('/commande', name: 'app_order')]
     public function order(): Response
     {
-        return $this->render('commande/index.html.twig', [
-            'controller_name' => 'CommandeController',
+        return $this->render('order/index.html.twig', [            
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
     }

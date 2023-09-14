@@ -2,7 +2,7 @@
 	<img src="{{ asset(food.image, 'foods') }}" alt="{{ food.image }}"/>
 	<div>
 		<div>{{ food.libelle }}</div>
-		<div>{{ food.description }}</div>
+		<div class="italic">{{ food.description }}</div>
 		<div>
 			<div>{{ food.prix|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr') }}</div>
 			<a href="{{ path('app_cart_add', { food: food.id }) }}">Ajouter au panier</a>
