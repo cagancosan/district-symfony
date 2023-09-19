@@ -24,6 +24,11 @@ services:
       $mailer: "@App\\Service\\MailService"
     tags:
       - { name: doctrine.event_subscriber }
+  App\EventSubscriber\OrderSubscriber:
+    arguments:
+      $mailer: "@App\\Service\\MailService"
+    tags:
+      - { name: doctrine.event_subscriber }
       
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

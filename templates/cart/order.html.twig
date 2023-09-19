@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/theme.html.twig' %}
+
+{% block title %}
+	The District - Commande
+{% endblock %}
+{% block body %}
+	<div class="flex flex-col justify-center items-center">
+		<div class="text-6xl text-visible mb-8">Commande</div>
+		{{ form_start(form, {'attr': {'class': 'flex flex-col gap-4 p-10 rounded-xl shadow-md bg-secondary text-dark text-xl w-full max-w-[600px]'}}) }}
+		{{ form_row(form.adresse_livraison) }}
+		{{ form_row(form.adresse_facturation) }}
+		{{ form_row(form.moyen_paiement) }}
+		{{ form_row(form.cgu, {'label_attr' : {'class': 'self-end'}, 'attr' : {'class': 'self-end'}}) }}
+		{{ form_row(form.save, {'row_attr' : {'class': 'flex items-center justify-center col-span-2'}}) }}
+		<span class="text-4xl text-right self-end font-bold">
+			Sous-total:
+			{{ total|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr') }}
+		</span>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

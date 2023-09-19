@@ -63,7 +63,7 @@ class RegisterController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/resend', name: 'app_verify_resend')]
+    #[Route('/verification/renvoi', name: 'app_verify_resend')]
     public function verifyResendEmail(UtilisateurRepository $utilisateurRepository)
     {
         $user = new Utilisateur();
@@ -84,7 +84,7 @@ class RegisterController extends AbstractController
         return $this->redirectToRoute('app_profile');
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verification/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UtilisateurRepository $utilisateurRepository, UserAuthenticatorInterface $userAuthenticator, UserFormAuthenticator $authenticator): Response
     {
         $user = new Utilisateur();

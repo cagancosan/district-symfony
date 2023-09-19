@@ -30,11 +30,11 @@ class ContactSubscriber implements EventSubscriber
             $objet = $entity->getObjet();
             $message = $entity->getMessage();
             if (preg_match("/rgpd\b/i", $objet) || preg_match("/rgpd\b/i", $message)) {
-                $message = "Un nouveau message en rapport avec la loi sur les RGPD vous a été envoyé !";
-                $message .= "L'id du message :" . $entity->getId();
-                $message .= "Objet du message :" . $entity->getObjet();
+                $message = "Un nouveau message en rapport avec la loi sur les RGPD vous a été envoyé !\n";
+                $message .= "L'id du message :" . $entity->getId() . "\n";
+                $message .= "Objet du message :" . $entity->getObjet() . "\n";
                 $message .= "Texte du message :" . $entity->getMessage();
-                $this->mailer->sendEmail('rgpd@district.com', 'the@district.com', 'Alerte RGPD !!!', '');
+                $this->mailer->sendEmail('rgpd@district.com', 'the@district.com', 'Alerte RGPD !!!', $message);
             }
         }
     }

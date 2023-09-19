@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
@@ -31,6 +32,18 @@ class Commande
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
     private Collection $details;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message: "Veuillez saisir une adresse de livraison.")]
+    private ?string $adresse_livraison = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message: "Veuillez saisir une adresse de facturation.")]
+    private ?string $adresse_facturation = null;
+
+    #[ORM\Column]
+    #[Assert\NotNull(message: "Veuillez saisir un moyen de paiement.")]
+    private ?int $moyen_paiement = null;
 
     public function __construct()
     {
@@ -116,6 +129,42 @@ class Commande
                 $detail->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdresseLivraison(): ?string
+    {
+        return $this->adresse_livraison;
+    }
+
+    public function setAdresseLivraison(string $adresse_livraison): static
+    {
+        $this->adresse_livraison = $adresse_livraison;
+
+        return $this;
+    }
+
+    public function getAdresseFacturation(): ?string
+    {
+        return $this->adresse_facturation;
+    }
+
+    public function setAdresseFacturation(string $adresse_facturation): static
+    {
+        $this->adresse_facturation = $adresse_facturation;
+
+        return $this;
+    }
+
+    public function getMoyenPaiement(): ?int
+    {
+        return $this->moyen_paiement;
+    }
+
+    public function setMoyenPaiement(int $moyen_paiement): static
+    {
+        $this->moyen_paiement = $moyen_paiement;
 
         return $this;
     }

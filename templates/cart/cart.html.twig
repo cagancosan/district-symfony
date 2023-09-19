@@ -30,17 +30,24 @@
 									{{ quantite }}
 								</span>
 							</span>
+							<a class="themedButton self-end" href="{{ path('app_cart_remove', { food: food.id }) }}">Supprimer</a>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
 			<div class="flex gap-x-4 p-4">
-				<div class="w-full flex flex-col gap-y-4 place-items-end">
-					<span class="text-4xl font-bold">
-						Sous-total:
-						{{ total|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr') }}
-					</span>
-					<a class="themedButton" href="{{path('app_order')}}">Commander</a>
+				<div class="w-full flex flex-col gap-y-4">
+					{% if cartList|length %}
+						<span class="text-4xl text-right self-end font-bold">
+							Sous-total:
+							{{ total|format_currency('EUR', { rounding_mode: 'floor' }, locale = 'fr') }}
+						</span>
+						<a class="themedButton self-end" href="{{path('app_cart_order')}}">Commander</a>
+					{% else %}
+						<span class="text-4xl font-bold">
+							Votre panier est vide
+						</span>
+					{% endif %}
 				</div>
 			</div>
 		</div>

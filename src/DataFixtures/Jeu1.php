@@ -472,30 +472,45 @@ class Jeu1 extends Fixture
         $commande1->setTotal(0);
         $commande1->setEtat(3);
         $commande1->setUtilisateur($utilisateur1);
+        $commande1->setAdresseLivraison("1 rue Afpa");
+        $commande1->setAdresseFacturation("1 rue Afpa");
+        $commande1->setMoyenPaiement(1);
 
         $commande2 = new Commande();
         $commande2->setDateCommande(new \DateTime());
         $commande2->setTotal(0);
         $commande2->setEtat(2);
         $commande2->setUtilisateur($utilisateur1);
+        $commande2->setAdresseLivraison("12 rue Amiens");
+        $commande2->setAdresseFacturation("12 rue Amiens");
+        $commande2->setMoyenPaiement(2);
 
         $commande3 = new Commande();
         $commande3->setDateCommande(new \DateTime());
         $commande3->setTotal(0);
         $commande3->setEtat(3);
         $commande3->setUtilisateur($utilisateur2);
+        $commande3->setAdresseLivraison("25 rue des Barils");
+        $commande3->setAdresseFacturation("11 rue des Capucins");
+        $commande3->setMoyenPaiement(3);
 
         $commande4 = new Commande();
         $commande4->setDateCommande(new \DateTime());
         $commande4->setTotal(0);
         $commande4->setEtat(1);
         $commande4->setUtilisateur($utilisateur2);
+        $commande4->setAdresseLivraison("19 rue Tonneau");
+        $commande4->setAdresseFacturation("19 rue Tonneau");
+        $commande4->setMoyenPaiement(2);
 
         $commande5 = new Commande();
         $commande5->setDateCommande(new \DateTime());
         $commande5->setTotal(0);
         $commande5->setEtat(3);
         $commande5->setUtilisateur($utilisateur3);
+        $commande5->setAdresseLivraison("4bis rue du Cirque");
+        $commande5->setAdresseFacturation("4 rue du Cirque");
+        $commande5->setMoyenPaiement(1);
 
         // Détails
         $detail1 = new Detail();

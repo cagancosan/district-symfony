@@ -1,8 +1,5 @@
 {% apply inline_css %}
 <style>
-	h1 {
-		color: red;
-	}
 	img {
 		height: 32px;
 		width: 32px;
@@ -10,7 +7,6 @@
 </style>
 
 <img src="{{ email.image('@icons/logo.svg') }}"/>
-<span>Bonjour {{ nick }} votre adresse est {{ to }} !</span>
-<h3>{{ message }}</h3>
+<h3>{{ message|nl2br }}</h3>
 <img src="{{ email.image('@icons/logo.svg') }}"/>
 {% endapply %}

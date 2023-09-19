@@ -42,8 +42,8 @@ security:
     # - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/commande, roles: ROLE_CLIENT}
     - { path: ^/profil, roles: ROLE_CLIENT}
-    - { path: ^/verify/resend, roles: ROLE_CLIENT}
-    - { path: ^/logout, roles: ROLE_CLIENT}
+    - { path: ^/verification/renvoi, roles: ROLE_CLIENT}
+    - { path: ^/deconnexion, roles: ROLE_CLIENT}
 
 when@test:
   security:
