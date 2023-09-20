@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use Exception;
-use App\Entity\Utilisateur;
 use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;

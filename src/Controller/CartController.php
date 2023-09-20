@@ -2,33 +2,28 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Plat;
+use App\Entity\Detail;
 use App\Entity\Commande;
 use App\Form\OrderFormType;
+use App\Service\CartService;
 use App\Repository\PlatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class CartController extends AbstractController
 {
     #[Route('/panier', name: 'app_cart')]
-    public function cart(SessionInterface $session, PlatRepository $foodRepo): Response
+    public function cart(CartService $cs, SessionInterface $session, PlatRepository $foodRepo): Response
     {
-        $cart = $session->get("cart", []);
-        $cartList = [];
-
-        foreach ($cart as $key => $value) {
-            $c = $foodRepo->find($key);
-            $cartList[] = $c;
-        }
-
+        $cartList = $cs->list($session, $foodRepo);
         return $this->render('cart/cart.html.twig', [
-            'cart' => $cart,
             'cartList' => $cartList,
             'controller_name' => 'CartController',
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
@@ -36,44 +31,29 @@ class CartController extends AbstractController
     }
 
     #[Route('/panier/ajouter/{food}', name: 'app_cart_add')]
-    public function cartAdd(Request $request, SessionInterface $session, Plat $food): Response
+    public function cartAdd(Request $request, CartService $cs, SessionInterface $session, PlatRepository $foodRepo, Plat $food): Response
     {
-        $cart = $session->get("cart", []);
-        $size = $session->get("size", 0);
-        if (!isset($cart[$food->getId()]))
-            $cart[$food->getId()] = 0;
-        $cart[$food->getId()]++;
-        $session->set("cart", $cart);
-        $session->set("size", ++$size);
-        $this->addFlash('success', $food->getLibelle() . " ajouté avec succès dans le panier !");
+        $cs->add($session, $food);
         $route = $request->headers->get('referer');
-
+        $this->addFlash('success', $food->getLibelle() . " ajouté avec succès dans le panier !");
         return $this->redirect($route);
     }
 
     #[Route('/panier/supprimer/{food}', name: 'app_cart_remove')]
-    public function cartRemove(Request $request, SessionInterface $session, Plat $food): Response
+    public function cartRemove(Request $request, CartService $cs, SessionInterface $session, Plat $food): Response
     {
-        $cart = $session->get("cart", []);
-        $size = $session->get("size", 0);
-        $cart[$food->getId()]--;
-        if ($cart[$food->getId()] <= 0) {
-            unset($cart[$food->getId()]);
-        }
-        $session->set("cart", $cart);
-        $session->set("size", --$size);
-        $this->addFlash('success', $food->getLibelle() . " supprimé avec succès dans le panier !");
+        $cs->remove($session, $food);
         $route = $request->headers->get('referer');
-
+        $this->addFlash('success', $food->getLibelle() . " supprimé avec succès dans le panier !");
         return $this->redirect($route);
     }
 
-    #[Route('/commande', name: 'app_cart_order')]
+    #[Route('/order', name: 'app_cart_order')]
     public function order(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, PlatRepository $foodRepo, UserInterface $user): Response
     {
         $cart = $session->get("cart", []);
         if (!$cart) {
-            $this->addFlash('error', "Veuillez ajouter des plats à votre panier avant d'accéder à la page commande.");
+            $this->addFlash('error', "Veuillez ajouter des plats à votre panier avant d'accéder à la page order.");
             return $this->redirectToRoute('app_home');
         }
         $form = $this->createForm(OrderFormType::class);
@@ -84,17 +64,33 @@ class CartController extends AbstractController
             $total += ($c->getPrix() * $value);
         }
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact = new Commande();
-            $contact = $form->getData();
-            $now = new \DateTime();
-            $contact->setDateCommande($now);
-            $contact->setTotal($total);
-            $contact->setEtat(0);
-            $contact->setUtilisateur($user);
-            $entityManager->persist($contact);
-            $entityManager->flush();
-            $this->addFlash('success', "Votre commande a bien été prise en compte !");
-            return $this->redirectToRoute('app_home');
+            try {
+                $order = new Commande();
+                $order = $form->getData();
+                $now = new \DateTime();
+                $order->setDateCommande($now);
+                $order->setTotal($total);
+                $order->setEtat(0);
+                $order->setUtilisateur($user);
+                foreach ($cart as $key => $value) {
+                    $detail = new Detail();
+                    $detail->setPlat($foodRepo->find($key));
+                    $detail->setCommande($order);
+                    $detail->setQuantite($value);
+                    $entityManager->persist($detail);
+                }
+
+                $entityManager->persist($order);
+                $entityManager->flush();
+                $this->addFlash('success', "Votre commande a bien été prise en compte !");
+                $session->set("cart", []);
+                $session->set("size", 0);
+                return $this->redirectToRoute('app_home');
+            } catch (Exception $e) {
+                $this->addFlash('error', "Erreur lors de la commande, veuillez réessayer ou contacter le restaurant pour plus d'informations.");
+                $this->addFlash('error', $th);
+                return $this->redirectToRoute('app_home');
+            }
         }
         return $this->render('cart/order.html.twig', [
             'form' => $form,

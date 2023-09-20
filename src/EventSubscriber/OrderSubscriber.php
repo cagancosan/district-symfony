@@ -2,10 +2,13 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Events;
 use App\Service\MailService;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Event\OnFlushEventArgs;
+use NumberFormatter;
 
 class OrderSubscriber implements EventSubscriber
 {
@@ -19,21 +22,32 @@ class OrderSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            Events::postPersist,
+            Events::onFlush,
         ];
     }
 
-    public function postPersist(LifecycleEventArgs $args)
+    public function onFlush(OnFlushEventArgs $args)
     {
-        $entity = $args->getObject();
-        if ($entity instanceof \App\Entity\Commande) {
-            $user = $entity->getUtilisateur();
-            $orderid = $entity->getId();
-            $message = "Nous accusons la réception de votre commande n°" . $orderid . "\n";
-            $message .= "Voici le récapitulatif de votre commande : \n";
-            $message .= "TODO DETAILS";
-
-            $this->mailer->sendEmailUser('the@district.com', $user->getEmail(), 'Validation de votre commande n°' . $orderid, $message, $user->getNom() . $user->getPrenom());
+        /**
+         * @var EntityManager
+         */
+        $em = $args->getObjectManager();
+        $uow = $em->getUnitOfWork();
+        $message = $messageDetails = "";
+        $user = new Utilisateur();
+        $price = new NumberFormatter("fr", NumberFormatter::CURRENCY);
+        foreach ($uow->getScheduledEntityInsertions() as $entity) {
+            if ($entity instanceof \App\Entity\Commande) {
+                $user = $entity->getUtilisateur();
+                $orderid = $entity->getId();
+                $message .= "Voici le récapitulatif de votre commande : \n";
+                $message .= $messageDetails;
+                $message .= "Total: " . $price->formatCurrency($entity->getTotal(), "EUR");
+            }
+            if ($entity instanceof \App\Entity\Detail) {
+                $messageDetails .= "x" . $entity->getQuantite() . " " . $entity->getPlat()->getLibelle() . " - " . $price->formatCurrency($entity->getPlat()->getPrix(), "EUR") . "\n";
+            }
         }
+        $this->mailer->sendEmailUser('the@district.com', $user->getEmail(), 'Validation de votre commande n°' . $orderid, $message, $user->getNom() . $user->getPrenom());
     }
 }
