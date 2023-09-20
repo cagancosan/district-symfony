@@ -48,6 +48,6 @@ class OrderSubscriber implements EventSubscriber
                 $messageDetails .= "x" . $entity->getQuantite() . " " . $entity->getPlat()->getLibelle() . " - " . $price->formatCurrency($entity->getPlat()->getPrix(), "EUR") . "\n";
             }
         }
-        $this->mailer->sendEmailUser('the@district.com', $user->getEmail(), 'Validation de votre commande n°' . $orderid, $message, $user->getNom() . $user->getPrenom());
+        $this->mailer->sendEmailUser('the@district.com', $user->getEmail(), 'Validation de votre commande' . $orderid, $message, $user->getNom() . $user->getPrenom());
     }
 }
