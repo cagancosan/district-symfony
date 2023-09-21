@@ -16,13 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CartController extends AbstractController
 {
     #[Route('/panier', name: 'app_cart')]
-    public function cart(CartService $cs, SessionInterface $session, PlatRepository $foodRepo): Response
+    public function cart(CartService $cs): Response
     {
-        $cartList = $cs->list($session, $foodRepo);
+        $cartList = $cs->list();
         return $this->render('cart/cart.html.twig', [
             'cartList' => $cartList,
             'controller_name' => 'CartController',
@@ -31,24 +32,24 @@ class CartController extends AbstractController
     }
 
     #[Route('/panier/ajouter/{food}', name: 'app_cart_add')]
-    public function cartAdd(Request $request, CartService $cs, SessionInterface $session, PlatRepository $foodRepo, Plat $food): Response
+    public function cartAdd(Request $request, CartService $cs, Plat $food): RedirectResponse
     {
-        $cs->add($session, $food);
+        $cs->add($food);
         $route = $request->headers->get('referer');
         $this->addFlash('success', $food->getLibelle() . " ajouté avec succès dans le panier !");
         return $this->redirect($route);
     }
 
     #[Route('/panier/supprimer/{food}', name: 'app_cart_remove')]
-    public function cartRemove(Request $request, CartService $cs, SessionInterface $session, Plat $food): Response
+    public function cartRemove(Request $request, CartService $cs, Plat $food): Response
     {
-        $cs->remove($session, $food);
+        $cs->remove($food);
         $route = $request->headers->get('referer');
         $this->addFlash('success', $food->getLibelle() . " supprimé avec succès dans le panier !");
         return $this->redirect($route);
     }
 
-    #[Route('/order', name: 'app_cart_order')]
+    #[Route('/commande', name: 'app_cart_order')]
     public function order(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, PlatRepository $foodRepo, UserInterface $user): Response
     {
         $cart = $session->get("cart", []);

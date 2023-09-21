@@ -5,21 +5,26 @@ namespace App\Service;
 use App\Entity\Plat;
 use App\Repository\PlatRepository;
 use Exception;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartService
 {
-    public function __construct()
+    private $session;
+    private $foodRepo;
+    
+    public function __construct(RequestStack $rs, PlatRepository $foodRepo)
     {
+        $this->session = $rs->getSession();
+        $this->foodRepo = $foodRepo;
     }
 
-    public function list(SessionInterface $session, PlatRepository $foodRepo): array
+    public function list(): array
     {
         try {
-            $cart = $session->get("cart", []);
+            $cart = $this->session->get("cart", []);
             $cartList = [];
             foreach ($cart as $key => $value) {
-                $c = $foodRepo->find($key);
+                $c = $this->foodRepo->find($key);
                 $cartList[] = $c;
             }
         } catch (Exception $e) {
@@ -28,33 +33,33 @@ class CartService
         return $cartList;
     }
 
-    public function add(SessionInterface $session, Plat $food): bool
+    public function add(Plat $food): bool
     {
         try {
-            $cart = $session->get("cart", []);
-            $size = $session->get("size", 0);
+            $cart = $this->session->get("cart", []);
+            $size = $this->session->get("size", 0);
             if (!isset($cart[$food->getId()]))
                 $cart[$food->getId()] = 0;
             $cart[$food->getId()]++;
-            $session->set("cart", $cart);
-            $session->set("size", ++$size);
+            $this->session->set("cart", $cart);
+            $this->session->set("size", ++$size);
         } catch (Exception $e) {
             return false;
         }
         return true;
     }
 
-    public function remove(SessionInterface $session, Plat $food): bool
+    public function remove(Plat $food): bool
     {
         try {
-            $cart = $session->get("cart", []);
-            $size = $session->get("size", 0);
+            $cart = $this->session->get("cart", []);
+            $size = $this->session->get("size", 0);
             $cart[$food->getId()]--;
             if ($cart[$food->getId()] <= 0) {
                 unset($cart[$food->getId()]);
             }
-            $session->set("cart", $cart);
-            $session->set("size", --$size);
+            $this->session->set("cart", $cart);
+            $this->session->set("size", --$size);
         } catch (Exception $e) {
             return false;
         }

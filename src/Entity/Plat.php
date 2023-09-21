@@ -2,33 +2,45 @@
 
 namespace App\Entity;
 
-use App\Repository\PlatRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PlatRepository;
+use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
 class Plat
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['read'])]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['read', 'write'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    #[Groups(['read', 'write'])]
     private ?string $prix = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['read', 'write'])]
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     private ?bool $active = null;
 
     #[ORM\OneToMany(mappedBy: 'plat', targetEntity: Detail::class)]
@@ -36,6 +48,7 @@ class Plat
 
     #[ORM\ManyToOne(inversedBy: 'plats')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read', 'write'])]
     private ?Categorie $categorie = null;
 
     public function __construct()

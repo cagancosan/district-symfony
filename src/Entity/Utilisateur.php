@@ -47,6 +47,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20)]
     #[Assert\Length(max: 20, maxMessage: "Le numéro de téléphone ne peut excéder {{ limit }} caractères.")]
     #[Assert\NotNull(message: "Veuillez saisir un numéro de téléphone.")]
+    #[Assert\Regex('/^[0-9+\.\-]+$/', message: "Veuillez saisir un numéro de téléphone valide.")]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 50)]
@@ -57,6 +58,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20)]
     #[Assert\Length(max: 20, maxMessage: "Le code postal ne peut excéder {{ limit }} caractères.")]
     #[Assert\NotNull(message: "Veuillez saisir un code postal.")]
+    #[Assert\Regex('/^[0-9\-]+$/', message: "Veuillez saisir un code postal valide.")]
     private ?string $cp = null;
 
     #[ORM\Column(length: 50)]

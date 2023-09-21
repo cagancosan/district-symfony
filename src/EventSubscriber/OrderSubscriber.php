@@ -37,17 +37,17 @@ class OrderSubscriber implements EventSubscriber
         $user = new Utilisateur();
         $price = new NumberFormatter("fr", NumberFormatter::CURRENCY);
         foreach ($uow->getScheduledEntityInsertions() as $entity) {
+            if ($entity instanceof \App\Entity\Detail) {
+                $messageDetails .= "x" . $entity->getQuantite() . " " . $entity->getPlat()->getLibelle() . " - " . $price->formatCurrency($entity->getPlat()->getPrix(), "EUR") . "\n";
+            }
             if ($entity instanceof \App\Entity\Commande) {
                 $user = $entity->getUtilisateur();
                 $orderid = $entity->getId();
                 $message .= "Voici le récapitulatif de votre commande : \n";
                 $message .= $messageDetails;
                 $message .= "Total: " . $price->formatCurrency($entity->getTotal(), "EUR");
-            }
-            if ($entity instanceof \App\Entity\Detail) {
-                $messageDetails .= "x" . $entity->getQuantite() . " " . $entity->getPlat()->getLibelle() . " - " . $price->formatCurrency($entity->getPlat()->getPrix(), "EUR") . "\n";
+                $this->mailer->sendEmailUser('the@district.com', $user->getEmail(), 'Validation de votre commande' . $orderid, $message, $user->getNom() . $user->getPrenom());
             }
         }
-        $this->mailer->sendEmailUser('the@district.com', $user->getEmail(), 'Validation de votre commande' . $orderid, $message, $user->getNom() . $user->getPrenom());
     }
 }
