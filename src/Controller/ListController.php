@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
-use App\Repository\CategorieRepository;
 use App\Repository\PlatRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategorieRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ListController extends AbstractController
 {
@@ -30,6 +31,22 @@ class ListController extends AbstractController
             'foods' => $foods,
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
         ]);
+    }
+
+    #[Route('/recherche', name: 'app_search')]
+    public function search(Request $request): Response
+    {
+        $search = $request->query->get('recherche');
+        if ($search) {
+            $categories = $this->categorieRepo->searchCategorie($search);
+            $foods = $this->platRepo->searchPlat($search);
+            return $this->render('list/search.html.twig', [
+                'search' => $search,
+                'categories' => $categories,
+                'foods' => $foods,
+                'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
+            ]);
+        }
     }
 
     #[Route('/categories/{page}', name: 'app_categories', condition: "params['page'] > 0")]

@@ -45,11 +45,25 @@ class CategorieRepository extends ServiceEntityRepository
             ->select('c, SUM(d.quantite) as total')
             ->join('c.plats', 'p')
             ->join('p.details', 'd')
+            ->where('c.active = 1')
             ->groupBy('c.id')
             ->orderBy('total', 'DESC')
             ->addOrderBy('p.libelle', 'ASC')
             ->setMaxResults(6);
 
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
+    public function searchCategorie($search): array
+    {
+        $search = '%' . $search . '%';
+        $qb = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.active = 1')
+            ->andWhere('c.libelle LIKE :search')
+            ->orderBy('c.libelle')
+            ->setParameter('search', $search);
         $query = $qb->getQuery();
         return $query->execute();
     }

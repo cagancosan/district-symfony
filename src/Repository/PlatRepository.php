@@ -44,11 +44,25 @@ class PlatRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->join('p.details', 'd')
             ->select('p, COUNT(d.commande) AS total')
+            ->where('p.active = 1')
             ->groupBy('p')
             ->orderBy('total', 'DESC')
             ->addOrderBy('p.libelle', 'ASC')
-            ->setMaxResults(5);
+            ->setMaxResults(4);
 
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
+    public function searchPlat($search): array
+    {
+        $search = '%'.$search.'%';
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.active = 1')
+            ->andWhere('p.libelle LIKE :search')
+            ->orderBy('p.libelle')
+            ->setParameter('search', $search);
         $query = $qb->getQuery();
         return $query->execute();
     }
