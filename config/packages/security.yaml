@@ -17,7 +17,7 @@ security:
       pattern: ^/api/login
       stateless: true
       json_login:
-        check_path: /api/login_check
+        check_path: api_login_check
         username_path: email
         password_path: password
         success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -57,8 +57,8 @@ security:
     - { path: ^/profil, roles: ROLE_CLIENT }
     - { path: ^/verification/renvoi, roles: ROLE_CLIENT }
     - { path: ^/deconnexion, roles: ROLE_CLIENT }
+    - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
-    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
   security:

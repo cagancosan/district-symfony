@@ -89,7 +89,6 @@ class CartController extends AbstractController
                 return $this->redirectToRoute('app_home');
             } catch (Exception $e) {
                 $this->addFlash('error', "Erreur lors de la commande, veuillez réessayer ou contacter le restaurant pour plus d'informations.");
-                $this->addFlash('error', $th);
                 return $this->redirectToRoute('app_home');
             }
         }

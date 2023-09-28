@@ -16,8 +16,8 @@ class Jeu1 extends Fixture
     {
         // Utilisateurs
         $utilisateur1 = new Utilisateur();
-        $utilisateur1->setEmail('jean.d@admin.com');
-        $utilisateur1->setPassword(password_hash('password123', PASSWORD_BCRYPT));
+        $utilisateur1->setEmail('pouet@gmail.com');
+        $utilisateur1->setPassword(password_hash('pouet', PASSWORD_BCRYPT));
         $utilisateur1->setNom('Dupont');
         $utilisateur1->setPrenom('Jean');
         $utilisateur1->setTelephone('0601020304');
