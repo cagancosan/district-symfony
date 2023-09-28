@@ -53,7 +53,7 @@ class ListController extends AbstractController
     public function listCategorie($page = 1): Response
     {
         $numberToShow = 6;
-        $categories = $this->categorieRepo->findBy([], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
+        $categories = $this->categorieRepo->findBy(['active' => 1], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
         if ($categories) {
             $categoriesCount = $this->categorieRepo->countCategories();
             return $this->render('list/listCategories.html.twig', [
@@ -70,7 +70,7 @@ class ListController extends AbstractController
     #[Route('/plats', name: 'app_foods')]
     public function listPlats(): Response
     {
-        $foods = $this->platRepo->findBy([], ['categorie' => 'ASC']);
+        $foods = $this->platRepo->findBy(['active' => 1], ['categorie' => 'ASC']);
         return $this->render('list/listFoods.html.twig', [
             'foods' => $foods,
             'cookie' => isset($_COOKIE['theme']) ? $_COOKIE['theme'] : null,
@@ -81,7 +81,7 @@ class ListController extends AbstractController
     public function listPlatsByCategorie(Categorie $categorie, $page = 1): Response
     {
         $numberToShow = 4;
-        $foods = $this->platRepo->findBy(['categorie' => $categorie->getId()], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
+        $foods = $this->platRepo->findBy(['categorie' => $categorie->getId(), 'active' => 1], ['libelle' => 'ASC'], $numberToShow, ($page - 1) * $numberToShow);
         if ($foods) {
             $foodsCount = $this->platRepo->countPlats($categorie->getId());
             return $this->render('list/listFoodsByCategorie.html.twig', [
