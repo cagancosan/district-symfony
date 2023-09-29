@@ -51,8 +51,6 @@ security:
     ROLE_CHEF: ROLE_CLIENT
 
   access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/commande, roles: ROLE_CLIENT }
     - { path: ^/profil, roles: ROLE_CLIENT }
     - { path: ^/verification/renvoi, roles: ROLE_CLIENT }

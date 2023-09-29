@@ -27,6 +27,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry("app", "./assets/app.js")
+    .addEntry('app-react', './react/my_react_app/index.js')
     .addEntry("js", "./assets/js/script.js")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -76,13 +77,13 @@ Encore
     .enableSassLoader()
 
     //enables PostCSS Loader
-    .enablePostCssLoader();
+    .enablePostCssLoader()
 
-// uncomment if you use TypeScript
-//.enableTypeScriptLoader()
+    // uncomment if you use TypeScript
+    //.enableTypeScriptLoader()
 
-// uncomment if you use React
-//.enableReactPreset()
+    // uncomment if you use React
+    .enableReactPreset()
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher

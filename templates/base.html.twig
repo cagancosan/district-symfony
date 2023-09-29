@@ -8,10 +8,7 @@
 		<link rel="shortcut icon" href="{{ asset('favicon.svg', 'icons')}}" type="image/x-icon">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
-		{% endblock %}
-
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_link_tags('app-react') }}
 		{% endblock %}
 	</head>
 	<body class="{{ (cookie == 'dark') ? 'dark' : '' }} ">
@@ -136,4 +133,8 @@
 			</footer>
 		</div>
 	</body>
+	{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+		{{ encore_entry_script_tags('app-react') }}
+	{% endblock %}
 </html>
