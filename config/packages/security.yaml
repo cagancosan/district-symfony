@@ -55,7 +55,8 @@ security:
     - { path: ^/profil, roles: ROLE_CLIENT }
     - { path: ^/verification/renvoi, roles: ROLE_CLIENT }
     - { path: ^/deconnexion, roles: ROLE_CLIENT }
-    - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api/, roles: PUBLIC_ACCESS }
+    - { path: ^/api/contacts, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
 
 when@test:

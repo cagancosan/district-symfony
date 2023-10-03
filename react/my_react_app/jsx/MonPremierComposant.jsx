@@ -5,35 +5,12 @@ const MonPremierComposant = () => {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
     useEffect(() => {
-        const credentials = {
-            email: 'xxxxx@gmail.com',
-            password: 'xxxxx'
-        };
-
-        const headers = {
-            'Content-Type': 'application/json'
-        };
-        axios.post('https://127.0.0.1:8000/api/login_check', credentials, { headers })
+        axios.get('https://127.0.0.1:8000/api/categories')
             .then((response) => {
-                if (response.status === 200) {
-                    const token = response.data.token;
-                    axios.get('https://127.0.0.1:8000/api/categories', {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    })
-                        .then((response) => {
-                            setResponseData(response.data);
-                        })
-                        .catch((error) => {
-                            setError(`Erreur lors de la requête avec le token Bearer : ${error.message}`);
-                        });
-                } else {
-                    setError(`Échec de l'authentification : ${response.status} ${response.statusText}`);
-                }
+                setResponseData(response.data);
             })
             .catch((error) => {
-                setError(`Erreur lors de la récupération du token : ${error.message}`);
+                setError(`Erreur lors de la requête : ${error.message}`);
             });
     }, []);
 
