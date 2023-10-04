@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import MonPremierComposant from "./jsx/MonPremierComposant";
+import CategoriesComponent from "./jsx/CategoriesComponent";
 
 ReactDOM.createRoot(document.getElementById('react-app')).render(
     <React.StrictMode>
-        <MonPremierComposant />
+        <CategoriesComponent />
     </React.StrictMode>,
 )
