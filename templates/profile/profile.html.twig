@@ -3,7 +3,7 @@
 	The District - Profil
 {% endblock %}
 {% block body %}
-	<div class="text-6xl text-visible mb-8">Vos informations</div>
+	<div class="mb-8 text-6xl text-visible">Vos informations</div>
 	<div class="grid gap-4 text-visible">
 		<div class="flex flex-col">
 			<span class="font-bold">Email</span>
@@ -54,7 +54,7 @@
 			{% else %}
 				<div class="flex flex-col">
 					<span class="text-red-500">Compte non vérifié ❌</span>
-					<a class="text-visible decoration-visible underline" href="{{ path('app_verify_resend') }}">
+					<a class="text-visible underline decoration-visible" href="{{ path('app_verify_resend') }}">
 						Renvoyer un mail
 					</a>
 				</div>

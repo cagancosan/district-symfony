@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-	<div class="text-6xl text-visible mb-8">Les plats</div>
-	<div class="w-full grid grid-cols-1 xl:grid-cols-2 gap-8 place-items-center">
+	<div class="mb-8 text-6xl text-visible">Les plats</div>
+	<div class="grid w-full grid-cols-1 place-items-center gap-8 xl:grid-cols-2">
 		{% for food in foods %}
 			{% embed 'components/component.cardFood.html.twig' %}{% endembed %}
 		{% endfor %}

@@ -30,8 +30,8 @@ const categoriesComponent = () => {
         <div>
             {error ? error : ""}
             {message ? message : ""}
-            <div className="text-6xl text-visible mb-4">Les catégories</div>
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+            <div className="mb-4 text-6xl text-visible">Les catégories</div>
+            <div className="grid w-full grid-cols-1 place-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {
                     categories.map((c) => (
                         <CardCategorieComponent key={c.id} categorie={c}></CardCategorieComponent>
